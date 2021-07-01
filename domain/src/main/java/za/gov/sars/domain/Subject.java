@@ -46,11 +46,6 @@ public class Subject extends BaseEntity {
     public void setCode(String Code) {
         this.Code = Code;
     }
-    @Column(name = "subject_Id")
-    private long subjectId;
-    @Column(name = "grade_Id")
-    private long gradeId;
-
     public List<Employee> getEmployees() {
         return employees;
     }

@@ -17,8 +17,11 @@ import za.gov.sars.common.SystemUserType;
 import za.gov.sars.domain.Employee;
 import za.gov.sars.domain.Grade;
 import za.gov.sars.domain.Student;
+import za.gov.sars.domain.Subject;
+import za.gov.sars.service.EmployeeServiceLocal;
 import za.gov.sars.service.GradeServiceLocal;
 import za.gov.sars.service.StudentServiceLocal;
+import za.gov.sars.service.SubjectServiceLocal;
 
 /**
  *
@@ -32,19 +35,27 @@ public class GradeBean extends BaseBean{
     private GradeServiceLocal gradeService;
     @Autowired
     private StudentServiceLocal studentService;
+    @Autowired
+    private SubjectServiceLocal subjectService;
+    @Autowired
+    private EmployeeServiceLocal employeeService;
     
     private List<Grade> grades=new ArrayList<>();
     private List<Student> students=new ArrayList<>();
+    private List<Subject> subjects=new ArrayList<>();
+    private List<Employee> employees=new ArrayList<>();
     
     private Grade grade;
     //Just added
-    private Employee employee;
+    
     @PostConstruct
     public void init()
     {
         this.resetView(false).setList(true);
         grades=gradeService.listAll();
         students=studentService.listAll();
+        subjects=subjectService.listAll();
+        employees=employeeService.listAll();
     }
     
     
@@ -122,13 +133,23 @@ public class GradeBean extends BaseBean{
         this.grade = grade;
     }
 
-     public void gradeListener() {
-        if (employee.getEmployeeType().equals(SystemUserType.EDUCATOR) || employee.getEmployeeType().equals(SystemUserType.HOD) || employee.getEmployeeType().equals(SystemUserType.PRINCIPAL))  {
-            setVisible(true);
-       } else {
-          setVisible(false);
-       }
+    public List<Subject> getSubjects() {
+        return subjects;
     }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+  
     
     
     

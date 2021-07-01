@@ -20,6 +20,7 @@ import za.gov.sars.domain.Grade;
 import za.gov.sars.domain.Student;
 import za.gov.sars.domain.Subject;
 import za.gov.sars.service.AssessmentServiceLocal;
+import za.gov.sars.service.EmployeeServiceLocal;
 import za.gov.sars.service.GradeServiceLocal;
 import za.gov.sars.service.StudentServiceLocal;
 import za.gov.sars.service.SubjectServiceLocal;
@@ -39,14 +40,17 @@ public class SubjectBean extends BaseBean{
     private StudentServiceLocal studentService;
     @Autowired
     private GradeServiceLocal gradeService;
+    @Autowired
+    private EmployeeServiceLocal employeeService;
     
-    List<Subject> subjects=new ArrayList<>();
-    List<Assessment> assessments=new ArrayList<>();
-    List<Student> students=new ArrayList<>();
-    private Grade grade;
+   private  List<Subject> subjects=new ArrayList<>();
+    private List<Assessment> assessments=new ArrayList<>();
+   private  List<Student> students=new ArrayList<>();
+    private List <Grade> grades;
+    private List<Employee> employee;
     
     private Subject subject;
-    private Employee employee;
+    
     
     
     @PostConstruct
@@ -57,7 +61,8 @@ public class SubjectBean extends BaseBean{
         subjects=subjectService.listAll();
         assessments=assessmentService.listAll();
         students=studentService.listAll();
-        grade=gradeService.findById(Long.MIN_VALUE);
+        grades=gradeService.listAll();
+        employee=employeeService.listAll();
           
     }
     
@@ -134,14 +139,6 @@ public class SubjectBean extends BaseBean{
         this.students = students;
     }
 
-    public Grade getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
-
     public Subject getSubject() {
         return subject;
     }
@@ -149,13 +146,24 @@ public class SubjectBean extends BaseBean{
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
-   public void subjectListener() {
-        if (employee.getEmployeeType().equals(SystemUserType.EDUCATOR) || employee.getEmployeeType().equals(SystemUserType.HOD) || employee.getEmployeeType().equals(SystemUserType.PRINCIPAL)) {
-            setVisible(true);
-        } else {
-            setVisible(false);
-        }
-    } 
+
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public List<Employee> getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(List<Employee> employee) {
+        this.employee = employee;
+    }
+  
+    
     
   
     

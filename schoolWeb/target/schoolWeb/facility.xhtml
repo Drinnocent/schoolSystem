@@ -37,7 +37,7 @@
                     <p:column headerText="Action">
                         <b:commandButton icon-size="lg" icon-awesome="pencil" action="#{facilityBean.addOrUpdate(fac)}" update="@form"/>
                         <p:spacer width="5px"/>
-                        <b:commandButton rendered="#{activeUser.admin or activeUser.principal}" icon-size="lg" icon-awesome="remove" action="#{employeeBean.delete(emp)}" update="@form"/>
+                        <b:commandButton rendered="#{activeUser.admin or activeUser.principal}" icon-size="lg" icon-awesome="remove" action="#{facilityBean.delete(fac)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
                 <b:panel rendered="#{employeeBean.add}" look="primary" title="Employee" collapsible="false">
@@ -81,9 +81,9 @@
                     <f:facet name="footer">
                         <p:toolbar>
                             <f:facet name="right">
-                                <b:commandButton size="xs" look="success" value="save" action="#{employeeBean.save(employeeBean.employee)}" update="@form"/>
+                                <b:commandButton size="xs" look="success" value="save" action="#{facilityBean.save(facilityBean.facility)}" update="@form"/>
                                 <p:spacer width="15px"/>
-                                <b:commandButton size="xs" look="danger" value="cancel" action="#{employeeBean.cancel(employeeBean.employee)}" update="@form"/>
+                                <b:commandButton size="xs" look="danger" value="cancel" action="#{facilityBean.cancel(facilityBean.facility)}" update="@form"/>
                             </f:facet>
                         </p:toolbar>
                     </f:facet>

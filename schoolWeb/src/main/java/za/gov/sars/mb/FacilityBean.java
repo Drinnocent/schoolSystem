@@ -15,8 +15,10 @@ import javax.faces.bean.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import za.gov.sars.domain.Facility;
 import za.gov.sars.domain.Grade;
+import za.gov.sars.domain.Subject;
 import za.gov.sars.service.FacilityServiceLocal;
 import za.gov.sars.service.GradeServiceLocal;
+import za.gov.sars.service.SubjectServiceLocal;
 
 /**
  *
@@ -30,17 +32,22 @@ public class FacilityBean extends BaseBean {
     @Autowired
     private GradeServiceLocal gradeService;
     
-    Facility facility;
+    @Autowired
+    private SubjectServiceLocal subjectService;
     
-     List<Facility> facilities=new ArrayList<>();
-     List<Grade> grades=new ArrayList<>();
+    private Facility facility;
+    
+     private List<Facility> facilities=new ArrayList<>();
+     private List<Grade> grades=new ArrayList<>();
+     private List<Subject> subjects=new ArrayList<>();
     
     @PostConstruct
     public void init()
     {
         this.resetView(false).setList(true);
-        List<Facility> facilities=facilityService.listAll();
-        List<Grade> grades=gradeService.listAll();
+        facilities=facilityService.listAll();
+        grades=gradeService.listAll();
+        subjects=subjectService.listAll();
     }
     
     
@@ -116,6 +123,14 @@ public class FacilityBean extends BaseBean {
 
     public void setGrades(List<Grade> grades) {
         this.grades = grades;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
     }
     
     
