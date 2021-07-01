@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+            <ui:define name="maincontent">
+                <b:panel rendered="#{studentProfileBean.student.personType eq 'LEARNER'}" look="primary" title="Profile" collapsible="false">
+                    <b:inputText value="#{studentProfileBean.student.firstName}" label="First Name" field-size="md"/>
+                    <b:inputText value="#{studentProfileBean.student.lastName}" label="Last Name" field-size="md"/>
+                    <b:inputText value="#{studentProfileBean.student.identityNumber}" label="Identity Number" field-size="md"/>
+                    <b:inputText value="#{studentProfileBean.student.studentNumber}" readonly="true" label="Employee Number" field-size="md"/>
+                    <b:inputText value="#{studentProfileBean.student.employeeType eq 'EDUCATOR' or empProfileBean.employee.employeeType eq 'HOD' or empProfileBean.employee.employeeType eq 'PRINCIPAL'}" value="#{empProfileBean.employee.saceRegNumber}" label="Sace Registration Number" field-size="md"/>
+                    <b:inputText value="#{studentProfileBean.student.createdDate}" readonly="true" label="Hired Date" field-size="md">
+                        <f:convertDateTime pattern="yyyy MM dd"/>
+                    </b:inputText>
+                    <b:inputText value="#{studentProfileBean.student.contactDetail.cellphone_number}" label="CellPhone Number" field-size="md"/>
+                    <b:inputText value="#{studentProfileBean.student.contactDetail.tellphone_number}" label="Telephone Number" field-size="md"/>
+                    <b:inputText value="#{studentProfileBean.student.contactDetail.emailAddress}" label="Email Address" field-size="md"/>
+                    <p:dataGrid value="#{studentProfileBean.student.addressList}" var="address" columns="2">
+                        <b:panelGrid col-spans="12" size="md" style-class="ui-fluid">
+                            <p:fieldset legend="#{address.addressType.toString()}">
+                                <b:inputText value="#{address.addressLine1}" label="Address Line 1" field-size="md" readonly="#{addressType eq 'POSTAL'}"/>
+                                <b:inputText value="#{address.addressLine2}" label="Address Line 2" field-size="md"/> 
+                                <b:inputText value="#{address.street}" label="Address Line 1" field-size="md" readonly="#{addressType eq 'POSTAL'}"/>
+                                <b:inputText value="#{address.area}" label="Address Line 1" field-size="md"/>
+                                <b:inputText value="#{address.code}" label="Address Line 1" field-size="md"/>
+                            </p:fieldset>
+                        </b:panelGrid>
+                    </p:dataGrid>
+                    </b:panelGrid>
+                    <f:facet name="footer">
+                        <p:toolbar>
+                            <f:facet name="right">
+                                <b:commandButton size="xs" look="success" value="Update" action="#{studentProfileBean.updateStudentProfile(studentProfileBean.student)}" update="@form"/>
+                                <p:spacer width="15px"/>
+                                <b:commandButton size="xs" look="danger" value="cancel" action="#{studentProfileBean.cancel(studentProfileBean.student)}" update="@form"/>
+                            </f:facet>
+                        </p:toolbar>
+                    </f:facet>
+                </b:panel>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <body>
+        <ui:composition>
+            
+            <b:navBar  rendered="#{activeUser.personType.toString() eq "System Admin"}"  fluid="true"  brand="System Admin" brandHref="#">
+                <b:navbarLinks >
+                    <b:navCommandLink value="Dashboard" action="#{menuBean.redirect('admindash')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Employee" action="#{menuBean.redirect('employee')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Students" action="#{menuBean.redirect('student')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Subject" action="#{menuBean.redirect('subject')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Users" action="#{menuBean.redirect('user')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Grades" action="#{menuBean.redirect('grade')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Facility" action="#{menuBean.redirect('facilities')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Profile" action="#{menuBean.redirect('profile')}" immediate="true"></b:navCommandLink>
+                 </b:navbarLinks>
+            </b:navBar
+            
+            <b:navBar  rendered="#{activeUser.learner}"  fluid="true"  brand="Learner" brandHref="#">
+                <b:navbarLinks >
+                    <b:navCommandLink value="Dashboard" action="#{menuBean.redirect("studentDash")}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Progress Report" action="#{menuBean.redirect('studentReport')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Profile" action="#{menuBean.redirect('profile')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Assessment" action="#{menuBean.redirect('asssessment')}" immediate="true"></b:navCommandLink>
+                </b:navbarLinks>
+            </b:navBar>
+            <b:navBar rendered="#{activeUser.educator}"  fluid="true"  brand="Educator" brandHref="#">
+                <b:navbarLinks >
+                    <b:navCommandLink value="Dashboard" action="#{menuBean.redirect('educatorDash')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Subject Report" action="#{menuBean.redirect('subjectReport')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Profile" action="#{menuBean.redirect('profile')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Assessment" action="#{menuBean.redirect('assessment')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Attendance" action="#{menuBean.redirect('attendance')}" immediate="true"></b:navCommandLink>
+                </b:navbarLinks>
+            </b:navBar>
+            <b:navBar  rendered="#{activeUser.admin}"  fluid="true"  brand="Office Admin" brandHref="#">
+                <b:navbarLinks >
+                    <b:navCommandLink value="Dashboard" action="#{menuBean.redirect('officeAddash')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Students" action="#{menuBean.redirect('student')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Subjects" action="#{menuBean.redirect('subject')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Facility" action="#{menuBean.redirect('facilities')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Profile" action="#{menuBean.redirect('profile')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Employees" action="#{menuBean.redirect('employee')}" immediate="true"></b:navCommandLink>
+                   
+                </b:navbarLinks>
+            </b:navBar>
+            <b:navBar  rendered="#{activeUser.principal}"  fluid="true"  brand="Program Manager" brandHref="#">
+                <b:navbarLinks >
+                    <b:navCommandLink value="Dashboard" action="#{menuBean.redirect('principalDash')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Progress Report" action="#{menuBean.redirect('progressReport')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Students" action="#{menuBean.redirect('student')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Employees" action="#{menuBean.redirect('employee')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Subjects" action="#{menuBean.redirect('subject')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Profile" action="#{menuBean.redirect('profile')}" immediate="true"></b:navCommandLink>
+                 </b:navbarLinks>
+            </b:navBar>
+            <b:navBar  rendered="#{activeUser.headOfDepartment}"  fluid="true"  brand="Program Manager" brandHref="#">
+                <b:navbarLinks >
+                    <b:navCommandLink value="Dashboard" action="#{menuBean.redirect('hodDash')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Progress Report" action="#{menuBean.redirect('progressReport')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Assessment" action="#{menuBean.redirect('assessment')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Attendance" action="#{menuBean.redirect('attendance')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Subjects" action="#{menuBean.redirect('subject')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Profile" action="#{menuBean.redirect('profile')}" immediate="true"></b:navCommandLink>
+                 </b:navbarLinks>
+            </b:navBar>
+            
+            
+        </ui:composition>
+    </body>
+</html>
+
+
+
+

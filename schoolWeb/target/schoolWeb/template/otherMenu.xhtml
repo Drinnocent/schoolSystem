@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <body>
+        <ui:composition>
+            <b:navBar  fluid="true"  brand="Admin" brandHref="#">
+                <b:navbarLinks >
+                    <b:navCommandLink value="Dashboard" action="#{menuBean.reRoute('adminDash')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Employees" action="#{menuBean.reRoute('employee')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Students" action="#{menuBean.reRoute('student')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Subjects" action="#{menuBean.reRoute('subject')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Users" action="#{menuBean.reRoute('user')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Grades" action="#{menuBean.reRoute('grade')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Facilities" action="#{menuBean.reRoute('facility')}" immediate="true"></b:navCommandLink>
+                    <b:navCommandLink value="Profile" action="#{menuBean.reRoute('profile')}" immediate="true"></b:navCommandLink>
+                </b:navbarLinks>
+            </b:navBar>            
+        </ui:composition>
+    </body>
+</html>
+
+
+
+

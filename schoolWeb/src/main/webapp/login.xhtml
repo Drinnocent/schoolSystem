@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:body>
+        <h:form prependId="false">
+            <b:row>
+                <b:column col-md="2">
+                    <p:graphicImage name="sarslogo.png" library="images" width="121" height="60"/>
+                </b:column>
+                <b:column col-md="8">
+                </b:column>
+                <b:column col-md="2">
+                    <p:menubar styleClass="headerMenuCSS">
+
+                    </p:menubar>
+                </b:column>
+            </b:row>
+            <b:navBar fluid="true" brand="School Management System"  brandHref="#"/>
+            <b:panel look="primary" title="Login" collapsible="false">
+                <b:panelGrid colSpans="12" size="md" styleClass="ui-fluid">
+                    <b:inputText value="#{loginBean.username}" label="Username" fieldSize="md"/>
+                    <b:inputText value="#{loginBean.password}" label="Password" fieldSize="md"/>
+                </b:panelGrid>
+                <f:facet name="footer">
+                    <p:toolbar>
+                        <f:facet name="right">
+                            <b:commandButton size="xs" value="Login"  look="success" action="#{loginBean.doLogin(loginBean.username, loginBean.password)}" update="@form"/>
+                        </f:facet>
+                    </p:toolbar> 
+                </f:facet>
+            </b:panel>
+        </h:form>
+    </h:body>   
+</html>
