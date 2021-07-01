@@ -176,15 +176,6 @@ public class StudentBean extends BaseBean {
     public void setStudent(Student student) {
         this.student = student;
     }
-    
-    public void studentListener() {
-        if (student.getLearner().equals(SystemUserType.LEARNER)) {
-            setVisible(true);
-        } else {
-            setVisible(false);
-        }
-    }
-    
-    
+       
     
 }

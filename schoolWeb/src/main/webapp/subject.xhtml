@@ -20,15 +20,15 @@
                             </f:facet>
                         </p:toolbar>
                     </f:facet>
-                    <p:column headerText="Hire Date">
+                    <p:column headerText="Created Date">
                         <h:outputText value="#{sub.createdDate}">
                             <f:convertDateTime pattern="yyyy MM dd"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText="Full Names">
+                    <p:column headerText="Subject Name">
                         <h:outputText value="#{sub.name}"/>
                     </p:column>
-                    <p:column headerText="Identity Number">
+                    <p:column headerText="Subject Code">
                         <h:outputText value="#{sub.code}"/>
                     </p:column>
                     <p:column headerText="Action">
@@ -36,7 +36,24 @@
                         <p:spacer width="5px"/>
                         <b:commandButton rendered="#{activeUser.admin or activeUser.principal}" icon-size="lg" icon-awesome="remove" action="#{employeeBean.delete(emp)}" update="@form"/>
                     </p:column>
-                </p:dataTable>
+                </p:dataTable> 
+                <b:panel rendered="#{subjectBean.add}" look="primary" title="Subject" collapsible="false">
+                    <b:panelGrid colSpans="12" size="md" style-class="ui-fluid">
+                        <b:inputText value="#{subjectBean.subject.name}" label="Subject Name" field-size="md"/>
+                        <b:inputText value="#{subjectBean.subject.code}" label="Subject Code" field-size="md"/>
+                        <b:inputText value="#{subjectBean.subject.id}" label="Subject ID" field-size="md"/>
+                        <b:inputText value="#{subjectBean.subject.id}" label="Subject ID" field-size="md"/>
+                    </b:panelGrid> 
+                    <f:facet name="footer">
+                        <p:toolbar>
+                            <f:facet name="right">
+                                <b:commandButton size="xs" look="success" value="save" action="#{subjectBean.save(subjectBean.subject)}" update="@form"/>
+                                <p:spacer width="15px"/>
+                                <b:commandButton size="xs" look="danger" value="cancel" action="#{subjectBean.cancel(subjectBean.subject)}" update="@form"/>
+                            </f:facet>
+                        </p:toolbar>
+                    </f:facet>
+                </b:panel>
             </ui:define>
         </ui:composition>
     </h:body>

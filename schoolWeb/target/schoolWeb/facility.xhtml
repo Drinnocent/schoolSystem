@@ -20,18 +20,18 @@
                             </f:facet>
                         </p:toolbar>
                     </f:facet>
-                    <p:column headerText="Hire Date">
+                    <p:column headerText="Facility Date">
                         <h:outputText value="#{fac.createdDate}">
                             <f:convertDateTime pattern="yyyy MM dd"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText="Full Names">
+                    <p:column headerText="Facility Location">
                         <h:outputText value="#{fac.location}"/>
                     </p:column>
-                    <p:column headerText="Identity Number">
+                    <p:column headerText="Facility Name">
                         <h:outputText value="#{fac.name}"/>
                     </p:column>
-                    <p:column headerText="Employee Number">
+                    <p:column headerText="Facility ID">
                         <h:outputText value="#{fac.id}"/>
                     </p:column>
                     <p:column headerText="Action">
@@ -40,44 +40,12 @@
                         <b:commandButton rendered="#{activeUser.admin or activeUser.principal}" icon-size="lg" icon-awesome="remove" action="#{facilityBean.delete(fac)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
-                <b:panel rendered="#{employeeBean.add}" look="primary" title="Employee" collapsible="false">
+                <b:panel rendered="#{facilityBean.add}" look="primary" title="Facility" collapsible="false">
                     <b:panelGrid colSpans="12" size="md" style-class="ui-fluid">
-                        <b:inputText value="#{employeeBean.employee.firstName}" label="First Name" field-size="md"/>
-                        <b:inputText value="#{employeeBean.employee.lastName}" label="Last Name" field-size="md"/>
-                        <b:inputText value="#{employeeBean.employee.identityNumber}" label="Identity Number" field-size="md"/>
-                        <b:inputText value="#{employeeBean.employee.employeeId}" label="Employee Number" field-size="md"/>
-                        <p:selectOneMenu value="#{employeeBean.employee.employeeType}" label="Employee Type" converter="entityConverter" filter="false">
-                            <p:ajax update="@form" listener="#{employeeBean.employeeTypeListener}"/>
-                            <f:selectItems value="#{employeeBean.employeeType}" var="empType" itemLabel="#{empType.toString()}" itemValue="#{empType}"/>
-                        </p:selectOneMenu>
+                        <b:inputText value="#{facilityBean.facility.name}" label="Facility Name" field-size="md"/>
+                        <b:inputText value="#{facilityBean.facility.location}" label="Facility Location" field-size="md"/>
+                        <b:inputText value="#{facilityBean.facility.id}" label="Facility ID" field-size="md"/>
                     </b:panelGrid> 
-                    <b:panelGrid rendered="#{employeeBean.visible}" colSpans="6,6" style-class="ui-fluid" size="md">
-                        <p:fieldset legend="Subjects">
-                            <b:panelGrid id="subjectListPG" colSpans="12" size="md" style-class="ui-fluid">
-                                <h:selectManyCheckbox value="#{employeeBean.employee.subjects}" layout="pageDirection" converter="entityConverter" collectionType="java.util.ArrayList">
-                                    <f:selectItems value="#{employeeBean.subjects}" var="subject" itemLabel="#{subject.name}" itemValue="#{subject}"/>
-                                </h:selectManyCheckbox>
-                            </b:panelGrid>
-                        </p:fieldset>
-                        <p:fieldset legend="Grades">
-                            <b:panelGrid id="gradesListPG" colSpans="12" size="md" style-class="ui-fluid">
-                                <h:selectManyCheckbox value="#{employeeBean.employee.grades}" layout="pageDirection" converter="entityConverter" collectionType="java.util.ArrayList">
-                                    <f:selectItems value="#{employeeBean.grades}" var="grade" itemLabel="#{grade.name} #{grade.designation}" itemValue="#{grade}"/>
-                                </h:selectManyCheckbox>
-                            </b:panelGrid>
-                        </p:fieldset>
-                    </b:panelGrid>
-                    <p:dataGrid value="#{employeeBean.employee.addressList}" var="address" columns="2">
-                        <b:panelGrid col-spans="12" size="md" style-class="ui-fluid">
-                            <p:fieldset legend="#{address.addressType.toString()}">
-                                <b:inputText value="#{address.addressLine1}" label="Address Line 1" field-size="md" readonly="#{addressType eq 'POSTAL'}"/>
-                                <b:inputText value="#{address.addressLine2}" label="Address Line 2" field-size="md"/>
-                                <b:inputText value="#{address.street}" label="Street" field-size="md" readonly="#{addressType eq 'POSTAL'}"/>
-                                <b:inputText value="#{address.area}" label="Area" field-size="md"/>
-                                <b:inputText value="#{address.code}" label="Code" field-size="md"/>
-                            </p:fieldset>
-                        </b:panelGrid>
-                    </p:dataGrid>
                     <f:facet name="footer">
                         <p:toolbar>
                             <f:facet name="right">

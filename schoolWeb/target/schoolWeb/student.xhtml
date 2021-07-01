@@ -53,7 +53,7 @@
                         <b:inputText value="#{studentBean.student.identityNumber}" label="Identity Number" field-size="md"/>
                         <b:inputText value="#{studentBean.student.studentNumber}" label="Student Number" field-size="md"/>
                         <p:selectOneMenu value="#{studentBean.student.learner}" label="Learner" converter="entityConverter" filter="false">
-                            <p:ajax update="@form" listener="#{studentBean.studentListener}"/>
+                            <p:ajax update="@form" listener="#{employeeBean.employeeTypeListener()}"/>
                             <f:selectItems value="#{studentBean.studentTypes}" var="stuInfo" itemLabel="#{stuInfo.toString()}" itemValue="#{stuInfo}"/>
                         </p:selectOneMenu>
                     </b:panelGrid> 

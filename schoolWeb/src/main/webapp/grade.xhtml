@@ -16,7 +16,7 @@
                     <f:facet name="header">
                         <p:toolbar>
                             <f:facet name="left">
-                                <b:commandButton icon-size="lg" icon-awesome="fa-plus-square-o" action="#{employeeBean.addOrUpdate(null)}" update="@form"/>
+                                <b:commandButton icon-size="lg" icon-awesome="fa-plus-square-o" action="#{gradeBean.addOrUpdate(null)}" update="@form"/>
                             </f:facet>
                         </p:toolbar>
                     </f:facet>
@@ -31,15 +31,28 @@
                     <p:column headerText="Designation">
                         <h:outputText value="#{gr.designation}"/>
                     </p:column>
-                    <p:column headerText="Grade ID">
-                        <h:outputText value="#{gr.id}"/>
-                    </p:column>
                     <p:column headerText="Action">
                         <b:commandButton icon-size="lg" icon-awesome="pencil" action="#{gradeBean.addOrUpdate(gr)}" update="@form"/>
                         <p:spacer width="5px"/>
                         <b:commandButton rendered="#{activeUser.admin or activeUser.principal}" icon-size="lg" icon-awesome="remove" action="#{gradeBean.delete(gr)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
+                <b:panel rendered="#{gradeBean.add}" look="primary" title="Grade" collapsible="false">
+                    <b:panelGrid colSpans="12" size="md" style-class="ui-fluid">
+                        <b:inputText value="#{gradeBean.grade.name}" label="Grade  Name" field-size="md"/>
+                        <b:inputText value="#{gradeBean.grade.designation}" label="Grade Designation" field-size="md"/>
+                        <b:inputText value="#{gradeBean.grade.id}" label="Grade ID" field-size="md"/>
+                    </b:panelGrid> 
+                    <f:facet name="footer">
+                        <p:toolbar>
+                            <f:facet name="right">
+                                <b:commandButton size="xs" look="success" value="save" action="#{gradeBean.save(gradeBean.grade)}" update="@form"/>
+                                <p:spacer width="15px"/>
+                                <b:commandButton size="xs" look="danger" value="cancel" action="#{gradeBean.cancel(gradeBean.grade)}" update="@form"/>
+                            </f:facet>
+                        </p:toolbar>
+                    </f:facet>
+                </b:panel>
             </ui:define>
         </ui:composition>
     </h:body>
