@@ -123,10 +123,12 @@ public class StudentBean extends BaseBean {
     }
     
     public void cancel(Student stu){
+        if(stu.getId()==null){
         if(students.contains(stu)){
             students.remove(stu);
         }
         this.resetView(false).setList(true);
+         }
     }
 
     public List<Student> getStudents() {

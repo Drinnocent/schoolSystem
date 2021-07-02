@@ -103,10 +103,12 @@ public class GradeBean extends BaseBean{
     }
     
     public void cancel(Grade gr){
+        if(gr.getId()==null){
         if(grades.contains(gr)){
             grades.remove(gr);
         }
         this.resetView(false).setList(true);
+        }
     }
 
     public List<Grade> getGrades() {

@@ -95,10 +95,12 @@ public class FacilityBean extends BaseBean {
     }
     
     public void cancel(Facility fac){
+        if(fac.getId()==null){
         if(facilities.contains(fac)){
             facilities.remove(fac);
         }
         this.resetView(false).setList(true);
+        }
     }
 
     public Facility getFacility() {
