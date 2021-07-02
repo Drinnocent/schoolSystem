@@ -179,5 +179,6 @@ public class StudentBean extends BaseBean {
         this.student = student;
     }
        
+ 
     
 }
