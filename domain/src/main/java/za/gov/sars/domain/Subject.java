@@ -12,6 +12,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 
@@ -30,6 +32,14 @@ public class Subject extends BaseEntity {
     private String Code;
     @ManyToMany(mappedBy = "subjects", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Employee> employees = new ArrayList<>();
+    @ManyToMany(mappedBy = "subjects", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Student> students = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Grade grade;
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Assessment> assessments = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private School school;
 
     public String getName() {
         return name;
@@ -46,6 +56,7 @@ public class Subject extends BaseEntity {
     public void setCode(String Code) {
         this.Code = Code;
     }
+
     public List<Employee> getEmployees() {
         return employees;
     }

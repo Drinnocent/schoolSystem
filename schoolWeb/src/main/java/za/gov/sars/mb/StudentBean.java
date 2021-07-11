@@ -33,102 +33,96 @@ import za.gov.sars.service.SubjectService;
 @ManagedBean
 @ViewScoped
 public class StudentBean extends BaseBean {
+
     @Autowired
     private StudentServiceLocal studentService;
     @Autowired
     private GradeService gradeService;
     @Autowired
     private SubjectService subjectService;
-    
-    
-    private List<Student> students=new ArrayList<>();
+
+    private List<Student> students = new ArrayList<>();
     private List<PersonType> personTypes = new ArrayList<>();
     private List<SystemUserType> studentTypes = new ArrayList<>();
     private List<AddressType> addressTypes = new ArrayList<>();
     private List<Subject> subjects = new ArrayList<>();
-   
-    
+
     private Student student;
-    
+
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         this.resetView(false).setList(true);
-        students=studentService.listAll();
-        personTypes=Arrays.asList(PersonType.values());
-        addressTypes=Arrays.asList(AddressType.values());
-        studentTypes=Arrays.asList(SystemUserType.values());
-        subjects=subjectService.listAll();
-       
-        
+        students = studentService.listAll();
+        personTypes = Arrays.asList(PersonType.values());
+        addressTypes = Arrays.asList(AddressType.values());
+        studentTypes = Arrays.asList(SystemUserType.values());
+        subjects = subjectService.listAll();
+
     }
-    
-    
-    public void addOrUpdate(Student stu){
+
+    public void addOrUpdate(Student stu) {
         this.resetView(false).setAdd(true);
-        if(stu != null){
-         //  stu.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+        if (stu != null) {
+            //  stu.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             stu.setUpdatedDate(new Date());
             student = stu;
-        }
-        else{
+        } else {
             student = new Student();
-          //  student.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            //  student.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             student.setCreatedDate(new Date());
-            
+
             Address physicalAddress = new Address();
             physicalAddress.setAddressType(AddressType.RESIDENTIAL);
-          //  physicalAddress.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            //  physicalAddress.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             physicalAddress.setCreatedDate(new Date());
-            
+
             Address postalAddress = new Address();
             postalAddress.setAddressType(AddressType.POSTAL);
-          //  postalAddress.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            //  postalAddress.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             postalAddress.setCreatedDate(new Date());
-            
+
             student.getAddressList().add(physicalAddress);
             student.getAddressList().add(postalAddress);
-            
+
             ContactDetail contactDetail = new ContactDetail();
-         //   contactDetail.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            //   contactDetail.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             contactDetail.setCreatedDate(new Date());
-            
+
             students.add(0, student);
         }
     }
-    
-    public void save(Student stu){
-        if( stu.getId() != null){
-            studentService.update( stu);
-        }
-        else{
+
+    public void save(Student stu) {
+        if (stu.getId() != null) {
+            studentService.update(stu);
+        } else {
             studentService.save(student);
         }
         this.resetView(false).setList(true);
     }
-    
-    public void delete(Student stu){
+
+    public void delete(Student stu) {
         studentService.deleteById(stu.getId());
         synchronize(stu);
         this.resetView(false).setList(true);
     }
-    
-    public void synchronize(Student stu){
+
+    public void synchronize(Student stu) {
         Iterator<Student> studentList = students.iterator();
-        while(studentList.hasNext()){
-            if(studentList.next().getId().equals(stu.getId())){
+        while (studentList.hasNext()) {
+            if (studentList.next().getId().equals(stu.getId())) {
                 studentList.remove();
             }
         }
     }
-    
-    public void cancel(Student stu){
-        if(stu.getId()==null){
-        if(students.contains(stu)){
-            students.remove(stu);
+
+    public void cancel(Student stu) {
+        if (stu.getId() == null) {
+            if (students.contains(stu)) {
+                students.remove(stu);
+            }
+            this.resetView(false).setList(true);
         }
-        this.resetView(false).setList(true);
-         }
     }
 
     public List<Student> getStudents() {
@@ -178,7 +172,5 @@ public class StudentBean extends BaseBean {
     public void setStudent(Student student) {
         this.student = student;
     }
-       
- 
-    
+
 }

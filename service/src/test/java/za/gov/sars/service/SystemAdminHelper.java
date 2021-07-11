@@ -6,6 +6,7 @@
 package za.gov.sars.service;
 
 import java.util.Date;
+import za.gov.sars.common.EmployeeType;
 import za.gov.sars.common.PersonType;
 import za.gov.sars.common.SystemUserType;
 import za.gov.sars.domain.Employee;
@@ -29,7 +30,7 @@ public class SystemAdminHelper {
         employee1.setEmployeeId("DI121415");
         employee1.setPersonType(PersonType.SYSTEM_USER);
         employee1.setSaceRegNumber("0201044");
-        employee1.setEmployeeType(SystemUserType.ADMIN);
+        employee1.setSystemUserType(SystemUserType.ADMIN);
 
         employeeRepository.save(employee1);
 
@@ -42,7 +43,7 @@ public class SystemAdminHelper {
         employee2.setEmployeeId("L1445415");
         employee2.setPersonType(PersonType.SYSTEM_USER);
         employee2.setSaceRegNumber("0201044");
-        employee2.setEmployeeType(SystemUserType.ADMIN);
+        employee2.setSystemUserType(SystemUserType.ADMIN);
         employeeRepository.save(employee2);
 
     }

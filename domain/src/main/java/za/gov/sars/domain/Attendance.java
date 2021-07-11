@@ -6,8 +6,11 @@
 package za.gov.sars.domain;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 
@@ -17,16 +20,16 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Audited
-@Table(name="attendance")
-public class Attendance extends BaseEntity
-{
-   
-    @Column(name="date")
+@Table(name = "attendance")
+public class Attendance extends BaseEntity {
+
+    @Column(name = "date")
     private Date date;
-    @Column(name="status")
+    @Column(name = "status")
     private String status;
 
-   
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Student student;
 
     public Date getDate() {
         return date;
@@ -44,8 +47,4 @@ public class Attendance extends BaseEntity
         this.status = status;
     }
 
-   
-    
-    
-    
 }

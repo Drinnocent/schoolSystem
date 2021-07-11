@@ -5,8 +5,14 @@
  */
 package za.gov.sars.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 
@@ -16,15 +22,19 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Audited
-@Table(name="facility")
-public class Facility extends BaseEntity 
-{
-   
-    @Column(name="facility_Name")
-    private String name;
-    @Column(name="facility_Location")
-    private String location;
+@Table(name = "facility")
+public class Facility extends BaseEntity {
 
+    @Column(name = "facility_Name")
+    private String name;
+    @Column(name = "facility_Location")
+    private String location;
+    @OneToMany(mappedBy = "facility", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private List<Grade> grades = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private School school;
+    @OneToMany(mappedBy = "facility",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    private List<Assessment> assessments=new ArrayList<>();
 
     public String getName() {
         return name;
@@ -41,6 +51,5 @@ public class Facility extends BaseEntity
     public void setLocation(String location) {
         this.location = location;
     }
-    
-    
+
 }

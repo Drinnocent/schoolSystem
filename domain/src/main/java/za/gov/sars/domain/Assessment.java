@@ -6,8 +6,11 @@
 package za.gov.sars.domain;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 
@@ -17,18 +20,26 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Audited
-@Table(name="assessment")
-public class Assessment extends BaseEntity
-{
-   
-    @Column(name="assess_status")
+@Table(name = "assessment")
+public class Assessment extends BaseEntity {
+
+    @Column(name = "assess_status")
     private String status;
-    @Column(name="student_Mark")
+    @Column(name = "student_Mark")
     private double studentmark;
-    @Column(name="pass_Mark")
+    @Column(name = "pass_Mark")
     private double passMark;
-    @Column(name="total_Mark")
+    @Column(name = "total_Mark")
     private double totalMark;
+
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Subject subject;
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Student student;
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Grade grade;
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Facility facility;
 
     public String getStatus() {
         return status;
@@ -97,6 +108,5 @@ public class Assessment extends BaseEntity
     private Date dueDate;
     private Date submissionDate;
     private String assessmentType;
-    
-    
+
 }

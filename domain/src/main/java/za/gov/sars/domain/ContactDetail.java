@@ -6,8 +6,11 @@
 package za.gov.sars.domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 
@@ -17,16 +20,20 @@ import org.hibernate.envers.Audited;
  */
 @Audited
 @Entity
-@Table(name="contact_detail")
-public class ContactDetail extends BaseEntity{
-    @Column(name="cellphone_number")
+@Table(name = "contact_detail")
+public class ContactDetail extends BaseEntity {
+
+    @Column(name = "cellphone_number")
     private String cellphone_number;
-    
-    @Column(name="telephone_number")
+
+    @Column(name = "telephone_number")
     private String tellphone_number;
-    
-     @Column(name="email_address")
+
+    @Column(name = "email_address")
     private String emailAddress;
+
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private School school;
 
     public String getCellphone_number() {
         return cellphone_number;
@@ -51,6 +58,5 @@ public class ContactDetail extends BaseEntity{
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-    
-    
+
 }

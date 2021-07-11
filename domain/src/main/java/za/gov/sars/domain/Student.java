@@ -10,15 +10,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
-import za.gov.sars.common.SystemUserType;
+
 
 /**
  *
@@ -26,28 +27,28 @@ import za.gov.sars.common.SystemUserType;
  */
 @Entity
 @Audited
-@Table(name="student")
-public class Student extends Person
-{
-    @Column(name="Student_Number")
+@Table(name = "student")
+public class Student extends Person {
+
+    @Column(name = "Student_Number")
     private String studentNumber;
-    
+
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "student_subject", joinColumns = {
         @JoinColumn(name = "student_id")}, inverseJoinColumns = {
         @JoinColumn(name = "subject_id")})
     private List<Subject> subjects = new ArrayList<>();
-    @Enumerated(EnumType.STRING)
-    @Column(name = "User_type")
-    private SystemUserType learner;
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Grade grade;
 
-    public SystemUserType getLearner() {
-        return learner;
-    }
+    @OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Assessment> assessments = new ArrayList<>();
 
-    public void setLearner(SystemUserType learner) {
-        this.learner = learner;
-    }
+    @OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Attendance> attendances = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private School school;
+   
 
     public String getStudentNumber() {
         return studentNumber;
@@ -56,6 +57,7 @@ public class Student extends Person
     public void setStudentNumber(String studentNumber) {
         this.studentNumber = studentNumber;
     }
+
     public List<Subject> getSubjects() {
         return subjects;
     }
@@ -64,5 +66,4 @@ public class Student extends Person
         this.subjects = subjects;
     }
 
-        
 }

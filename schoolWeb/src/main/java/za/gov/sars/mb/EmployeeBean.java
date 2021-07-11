@@ -44,7 +44,7 @@ public class EmployeeBean extends BaseBean {
 
     private List<Employee> employees = new ArrayList<>();
     private List<PersonType> personType = new ArrayList<>();
-    private List<SystemUserType> employeeType = new ArrayList<>();
+    private List<SystemUserType> systemUserType = new ArrayList<>();
     private List<AddressType> addressType = new ArrayList<>();
     private List<Grade> grades = new ArrayList<>();
     private List<Subject> subjects = new ArrayList<>();
@@ -56,7 +56,7 @@ public class EmployeeBean extends BaseBean {
         this.resetView(false).setList(true);
         employees = employeeService.listAll();
         personType = Arrays.asList(PersonType.values());
-        employeeType = Arrays.asList(SystemUserType.values());
+        systemUserType = Arrays.asList(SystemUserType.values());
         addressType = Arrays.asList(AddressType.values());
         grades = gradeservice.listAll();
         subjects = subjectService.listAll();
@@ -139,14 +139,6 @@ public class EmployeeBean extends BaseBean {
 
     }
 
-    public void employeeTypeListener() {
-        if (employee.getEmployeeType().equals(SystemUserType.EDUCATOR) || employee.getEmployeeType().equals(SystemUserType.HOD) || employee.getEmployeeType().equals(SystemUserType.PRINCIPAL)) {
-            setVisible(true);
-        } else {
-            setVisible(false);
-        }
-    }
-
     public List<Employee> getEmployees() {
         return employees;
     }
@@ -163,13 +155,14 @@ public class EmployeeBean extends BaseBean {
         this.personType = personType;
     }
 
-    public List<SystemUserType> getEmployeeType() {
-        return employeeType;
+    public List<SystemUserType> getSystemUserType() {
+        return systemUserType;
     }
 
-    public void setEmployeeType(List<SystemUserType> employeeType) {
-        this.employeeType = employeeType;
+    public void setSystemUserType(List<SystemUserType> systemUserType) {
+        this.systemUserType = systemUserType;
     }
+    
 
     public List<AddressType> getAddressType() {
         return addressType;
@@ -201,5 +194,13 @@ public class EmployeeBean extends BaseBean {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+    
+      public void employeeTypeListener() {
+        if (employee.getSystemUserType().equals(SystemUserType.EDUCATOR) || employee.getSystemUserType().equals(SystemUserType.HOD) || employee.getSystemUserType().equals(SystemUserType.PRINCIPAL)) {
+            setVisible(true);
+        } else {
+            setVisible(false);
+        }
     }
 }
