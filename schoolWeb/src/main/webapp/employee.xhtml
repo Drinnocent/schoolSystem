@@ -52,9 +52,9 @@
                         <b:inputText value="#{employeeBean.employee.lastName}" label="Last Name" field-size="md"/>
                         <b:inputText value="#{employeeBean.employee.identityNumber}" label="Identity Number" field-size="md"/>
                         <b:inputText value="#{employeeBean.employee.employeeId}" label="Employee Number" field-size="md"/>
-                        <p:selectOneMenu value="#{employeeBean.employee.employeeType}" label="Employee Type" converter="entityConverter" filter="false">
+                        <p:selectOneMenu value="#{employeeBean.employee.systemUserType}" label="Employee Type" converter="entityConverter" filter="false">
                             <p:ajax update="@form" listener="#{employeeBean.employeeTypeListener}"/>
-                            <f:selectItems value="#{employeeBean.employeeType}" var="empType" itemLabel="#{empType.toString()}" itemValue="#{empType}"/>
+                            <f:selectItems value="#{employeeBean.systemUserType}" var="empType" itemLabel="#{empType.toString()}" itemValue="#{empType}"/>
                         </p:selectOneMenu>
                     </b:panelGrid> 
                     <b:panelGrid rendered="#{employeeBean.visible}" colSpans="6,6" style-class="ui-fluid" size="md">

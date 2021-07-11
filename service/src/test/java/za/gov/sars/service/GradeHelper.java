@@ -36,6 +36,22 @@ public class GradeHelper {
         grade3.setName("Grade 10");
         grade3.setDesignation("F");
         gradeRepository.save(grade3);
+        
+         Grade grade4 = new Grade();
+        grade4.setCreatedBy("Test");
+        grade4.setCreatedDate(new Date());
+        grade4.setName("Grade 11");
+        grade4.setDesignation("D");
+        gradeRepository.save(grade4);
+        
+         Grade grade5 = new Grade();
+        grade5.setCreatedBy("Test");
+        grade5.setCreatedDate(new Date());
+        grade5.setName("Grade 11");
+        grade5.setDesignation("L");
+        gradeRepository.save(grade5);
+        
+        
 
     }
     /* public static void addEmployeeToGrade(GradeRepository gradeRepository, EmployeeRepository employeeRepository)

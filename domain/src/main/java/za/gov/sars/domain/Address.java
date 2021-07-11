@@ -5,10 +5,13 @@
  */
 package za.gov.sars.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 import za.gov.sars.common.AddressType;
@@ -19,27 +22,28 @@ import za.gov.sars.common.AddressType;
  */
 @Entity
 @Audited
-@Table(name="address")
+@Table(name = "address")
 public class Address extends BaseEntity {
-    
+
     @Enumerated(EnumType.STRING)
-    @Column(name="address_Type")
+    @Column(name = "address_Type")
     private AddressType addressType;
 
-  
-
-    
-    @Column(name="addressline_1")
+    @Column(name = "addressline_1")
     private String addressLine1;
-    
-    @Column(name="addressline_2")
+
+    @Column(name = "addressline_2")
     private String addressLine2;
-    
-    @Column(name="street")
+
+    @Column(name = "street")
     private String street;
-    
-    @Column(name="are")
+
+    @Column(name = "are")
     private String area;
+
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private School school;
+    
 
     public String getAddressLine1() {
         return addressLine1;
@@ -80,8 +84,8 @@ public class Address extends BaseEntity {
     public void setCode(String code) {
         this.code = code;
     }
-    
-    @Column(name="code")
+
+    @Column(name = "code")
     private String code;
 
     public AddressType getAddressType() {
@@ -91,8 +95,5 @@ public class Address extends BaseEntity {
     public void setAddressType(AddressType addressType) {
         this.addressType = addressType;
     }
-    
-    
-    
-    
+
 }

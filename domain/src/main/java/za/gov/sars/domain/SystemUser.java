@@ -31,10 +31,8 @@ public class SystemUser extends Person{
     @Enumerated(EnumType.STRING)
     @Column(name = "system_user_type")
     private SystemUserType systemUserType;
-    @Enumerated(EnumType.STRING)
     @Column(name = "system_user_status")
     private SystemUserStatus systemUserStatus;
-
     public String getUsername() {
         return username;
     }

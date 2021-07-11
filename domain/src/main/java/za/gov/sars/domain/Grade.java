@@ -11,9 +11,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.envers.Audited;
 
 /**
@@ -22,15 +23,24 @@ import org.hibernate.envers.Audited;
  */
 @Entity
 @Audited
-@Table(name="grade")
-public class Grade extends BaseEntity{
-    @Column(name="name")
+@Table(name = "grade")
+public class Grade extends BaseEntity {
+
+    @Column(name = "name")
     private String name;
-    @Column(name="designation")
+    @Column(name = "designation")
     private String designation;
-   //@ManyToMany(mappedBy="grades",cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
-    @ManyToMany(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
-   private List<Student> students=new ArrayList<>();   
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Student student;
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    List<Subject> subject = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Facility facility;
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private School school;
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Assessment> assessments = new ArrayList<>();
+
     public String getName() {
         return name;
     }
@@ -39,15 +49,6 @@ public class Grade extends BaseEntity{
         this.name = name;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-
     public String getDesignation() {
         return designation;
     }
@@ -55,8 +56,5 @@ public class Grade extends BaseEntity{
     public void setDesignation(String designation) {
         this.designation = designation;
     }
-    
-    
-    
-    
+
 }

@@ -14,6 +14,6 @@ import za.gov.sars.domain.Subject;
  * @author S2028389
  */
 @Repository
-public interface SubjectRepository  extends JpaRepository<Subject,Long> {
-    
+public interface SubjectRepository extends JpaRepository<Subject, Long> {
+
 }

@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -16,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 import za.gov.sars.common.SystemUserType;
@@ -45,10 +46,11 @@ public class Employee extends Person {
         @JoinColumn(name = "employee_id")}, inverseJoinColumns = {
         @JoinColumn(name = "subject_id")})
     private List<Subject> subjects = new ArrayList<>();
-
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private School school;
+    
     @Enumerated(EnumType.STRING)
-    @Column(name = "employeeType")
-    private SystemUserType employeeType;
+    private SystemUserType systemUserType;
 
     public String getEmployeeId() {
         return employeeId;
@@ -74,14 +76,6 @@ public class Employee extends Person {
         this.grades = grades;
     }
 
-    public List<Subject> getSubject() {
-        return subjects;
-    }
-
-    public void setSubject(List<Subject> subject) {
-        this.subjects = subject;
-    }
-
     public List<Subject> getSubjects() {
         return subjects;
     }
@@ -90,20 +84,20 @@ public class Employee extends Person {
         this.subjects = subjects;
     }
 
-    public SystemUserType getEmployeeType() {
-        return employeeType;
-    }
-
-    public void setEmployeeType(SystemUserType employeeType) {
-        this.employeeType = employeeType;
-    }
-
     public void addGrade(Grade grade) {
         this.grades.add(grade);
     }
 
     public void addSubject(Subject subject) {
         this.subjects.add(subject);
+    }
+
+    public SystemUserType getSystemUserType() {
+        return systemUserType;
+    }
+
+    public void setSystemUserType(SystemUserType systemUserType) {
+        this.systemUserType = systemUserType;
     }
 
 }

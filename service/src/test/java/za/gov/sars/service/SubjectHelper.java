@@ -37,6 +37,20 @@ public class SubjectHelper {
         subject3.setName("ISTN ");
         subject3.setCode("ISTN313");
         subjectRepository.save(subject3);
+        
+        Subject subject4 = new Subject();
+        subject4.setCreatedBy("Test");
+        subject4.setCreatedDate(new Date());
+        subject4.setName("Economics ");
+        subject4.setCode("Econ102");
+        subjectRepository.save(subject4);
+        
+        Subject subject5 = new Subject();
+        subject5.setCreatedBy("Test");
+        subject5.setCreatedDate(new Date());
+        subject5.setName("Pychology ");
+        subject5.setCode("pych104");
+        subjectRepository.save(subject5);
 
     }
 

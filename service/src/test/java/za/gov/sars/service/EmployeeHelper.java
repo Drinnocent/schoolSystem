@@ -12,6 +12,7 @@ import za.gov.sars.common.SystemUserType;
 import za.gov.sars.domain.Address;
 import za.gov.sars.domain.ContactDetail;
 import za.gov.sars.domain.Employee;
+import za.gov.sars.domain.SystemUser;
 import za.gov.sars.persistence.EmployeeRepository;
 import za.gov.sars.persistence.GradeRepository;
 import za.gov.sars.persistence.SubjectRepository;
@@ -33,7 +34,7 @@ public class EmployeeHelper {
         employee1.setEmployeeId("DI121415");
         employee1.setPersonType(PersonType.EMPLOYEE);
         employee1.setSaceRegNumber("0201044");
-        employee1.setEmployeeType(SystemUserType.EDUCATOR);
+        employee1.setSystemUserType(SystemUserType.EDUCATOR);
 
         ContactDetail contact1 = new ContactDetail();
         contact1.setCreatedBy("Abelo");
@@ -65,6 +66,8 @@ public class EmployeeHelper {
 
         employee1.addAddress(addr1);
         employee1.addAddress(addr2);
+        employee1.setGrades(gradeReposistory.findAll());
+        employee1.setSubjects(subjectRepository.findAll());
 
         employeeRepository.save(employee1);
 
@@ -78,7 +81,7 @@ public class EmployeeHelper {
         employee2.setEmployeeId("DI121415");
         employee2.setPersonType(PersonType.EMPLOYEE);
         employee2.setSaceRegNumber("0201044");
-        employee2.setEmployeeType(SystemUserType.HOD);
+        employee2.setSystemUserType(SystemUserType.HOD);
 
         ContactDetail contact2 = new ContactDetail();
         contact2.setCreatedBy("Aphiwe");
@@ -121,7 +124,7 @@ public class EmployeeHelper {
         employee3.setEmployeeId("DI121415");
         employee3.setPersonType(PersonType.EMPLOYEE);
         employee3.setSaceRegNumber("0201044");
-        employee3.setEmployeeType(SystemUserType.PRINCIPAL);
+        employee3.setSystemUserType(SystemUserType.PRINCIPAL);
 
         ContactDetail contact3 = new ContactDetail();
         contact3.setCreatedBy("Test");
@@ -164,7 +167,7 @@ public class EmployeeHelper {
         employee4.setEmployeeId("DI121415");
         employee4.setPersonType(PersonType.EMPLOYEE);
         employee4.setSaceRegNumber("0201044");
-        employee4.setEmployeeType(SystemUserType.PRINCIPAL);
+        employee4.setSystemUserType(SystemUserType.GENERAL_WORKER);
 
         ContactDetail contact4 = new ContactDetail();
         contact4.setCreatedBy("Lelo");
@@ -207,7 +210,7 @@ public class EmployeeHelper {
         employee5.setEmployeeId("DI121415");
         employee5.setPersonType(PersonType.EMPLOYEE);
         employee5.setSaceRegNumber("0201044");
-        employee5.setEmployeeType(SystemUserType.CLERK);
+        employee5.setSystemUserType(SystemUserType.CLERK);
 
         ContactDetail contact5 = new ContactDetail();
         contact5.setCreatedBy("Lethu");
@@ -250,7 +253,7 @@ public class EmployeeHelper {
         employee6.setEmployeeId("DI121415");
         employee6.setPersonType(PersonType.EMPLOYEE);
         employee6.setSaceRegNumber("0201044");
-        employee6.setEmployeeType(SystemUserType.PRINCIPAL);
+        employee6.setSystemUserType(SystemUserType.ADMIN);
 
         ContactDetail contact6 = new ContactDetail();
         contact6.setCreatedBy("Miz");

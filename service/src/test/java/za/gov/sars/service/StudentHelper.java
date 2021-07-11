@@ -30,7 +30,8 @@ public class StudentHelper {
         student1.setIdentityNumber("198702106394087");
         student1.setStudentNumber("217001326");
         student1.setPersonType(PersonType.LEARNER);
-        student1.setLearner(SystemUserType.LEARNER);
+        
+        //student1.setLearn(SystemUserType.LEARNER);
         
 
         ContactDetail contact1 = new ContactDetail();
@@ -74,7 +75,7 @@ public class StudentHelper {
         student2.setIdentityNumber("000702106394087");
         student2.setStudentNumber("218001326");
         student2.setPersonType(PersonType.LEARNER);
-        student2.setLearner(SystemUserType.LEARNER);
+       // student2.setLearner(SystemUserType.LEARNER);
         
         ContactDetail contact2 = new ContactDetail();
         contact2.setCreatedBy("Aphiwe");
@@ -117,7 +118,7 @@ public class StudentHelper {
         student3.setIdentityNumber("98702106394087");
         student3.setStudentNumber("219001326");
         student3.setPersonType(PersonType.LEARNER);
-        student3.setLearner(SystemUserType.LEARNER);
+       // student3.setLearner(SystemUserType.LEARNER);
         
         
         
@@ -162,7 +163,7 @@ public class StudentHelper {
         student4.setIdentityNumber("98702106394087");
         student4.setStudentNumber("219001326");
         student4.setPersonType(PersonType.LEARNER);
-        student4.setLearner(SystemUserType.LEARNER);
+        //student4.setLearner(SystemUserType.LEARNER);
         
         ContactDetail contact4 = new ContactDetail();
         contact4.setCreatedBy("Lelo");

@@ -29,8 +29,8 @@ import za.gov.sars.service.SubjectServiceLocal;
  */
 @ManagedBean
 @ViewScoped
-public class GradeBean extends BaseBean{
-    
+public class GradeBean extends BaseBean {
+
     @Autowired
     private GradeServiceLocal gradeService;
     @Autowired
@@ -39,75 +39,69 @@ public class GradeBean extends BaseBean{
     private SubjectServiceLocal subjectService;
     @Autowired
     private EmployeeServiceLocal employeeService;
-    
-    private List<Grade> grades=new ArrayList<>();
-    private List<Student> students=new ArrayList<>();
-    private List<Subject> subjects=new ArrayList<>();
-    private List<Employee> employees=new ArrayList<>();
-    
+
+    private List<Grade> grades = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
+    private List<Subject> subjects = new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
+
     private Grade grade;
     //Just added
-    
+
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         this.resetView(false).setList(true);
-        grades=gradeService.listAll();
-        students=studentService.listAll();
-        subjects=subjectService.listAll();
-        employees=employeeService.listAll();
+        grades = gradeService.listAll();
+        students = studentService.listAll();
+        subjects = subjectService.listAll();
+        employees = employeeService.listAll();
     }
-    
-    
-    public void addOrUpdate(Grade gr){
+
+    public void addOrUpdate(Grade gr) {
         this.resetView(false).setAdd(true);
-        if(gr != null){
-          //  gr.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
-           gr.setUpdatedDate(new Date());
+        if (gr != null) {
+            //  gr.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            gr.setUpdatedDate(new Date());
             grade = gr;
-        }
-        else{
+        } else {
             grade = new Grade();
-          //  grade.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            //  grade.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             grade.setCreatedDate(new Date());
-            
-            
+
             grades.add(0, grade);
         }
     }
-    
-    
-    public void save(Grade gr){
-        if(gr.getId() != null){
+
+    public void save(Grade gr) {
+        if (gr.getId() != null) {
             gradeService.update(gr);
-        }
-        else{
+        } else {
             gradeService.save(gr);
         }
         this.resetView(false).setList(true);
     }
-    
-    public void delete(Grade gr){
+
+    public void delete(Grade gr) {
         gradeService.deleteById(gr.getId());
         synchronize(gr);
         this.resetView(false).setList(true);
     }
-    
-    public void synchronize(Grade gr){
+
+    public void synchronize(Grade gr) {
         Iterator<Grade> gradeList = grades.iterator();
-        while(gradeList.hasNext()){
-            if(gradeList.next().getId().equals(gr.getId())){
+        while (gradeList.hasNext()) {
+            if (gradeList.next().getId().equals(gr.getId())) {
                 gradeList.remove();
             }
         }
     }
-    
-    public void cancel(Grade gr){
-        if(gr.getId()==null){
-        if(grades.contains(gr)){
-            grades.remove(gr);
-        }
-        this.resetView(false).setList(true);
+
+    public void cancel(Grade gr) {
+        if (gr.getId() == null) {
+            if (grades.contains(gr)) {
+                grades.remove(gr);
+            }
+            this.resetView(false).setList(true);
         }
     }
 
@@ -150,9 +144,6 @@ public class GradeBean extends BaseBean{
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+    
 
-  
-    
-    
-    
 }

@@ -46,8 +46,8 @@ public class SubjectBean extends BaseBean{
    private  List<Subject> subjects=new ArrayList<>();
     private List<Assessment> assessments=new ArrayList<>();
    private  List<Student> students=new ArrayList<>();
-    private List <Grade> grades;
-    private List<Employee> employee;
+    private List <Grade> grades=new ArrayList<>();
+    private List<Employee> employee=new ArrayList<>();
     
     private Subject subject;
     

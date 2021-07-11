@@ -15,9 +15,7 @@ import za.gov.sars.common.PersonType;
  * @author S2028389
  */
 //will manage who is the active user
-@ManagedBean(eager=true) //used through the system and eager true because it will used throughout
-//jsf manages bean
-//work 
+@ManagedBean(eager=true) //used through the system and eager true because it will used throughout /jsf manages bean
 @SessionScope  //manages how user have been online
 public class ActiveUser implements Serializable{
     

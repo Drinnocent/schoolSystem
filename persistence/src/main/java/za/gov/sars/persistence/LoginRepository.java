@@ -6,12 +6,14 @@
 package za.gov.sars.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.gov.sars.domain.SystemUser;
 
 /**
  *
  * @author S2028389
  */
+@Repository
 public interface LoginRepository extends JpaRepository<SystemUser,Long>{
     
 }

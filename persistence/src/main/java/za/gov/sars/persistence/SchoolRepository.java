@@ -14,6 +14,6 @@ import za.gov.sars.domain.School;
  * @author S2028389
  */
 @Repository
-public interface SchoolRepository extends JpaRepository<School,Long> {
-    
+public interface SchoolRepository extends JpaRepository<School, Long> {
+
 }
