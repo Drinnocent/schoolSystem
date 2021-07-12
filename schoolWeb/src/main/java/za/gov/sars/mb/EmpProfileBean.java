@@ -43,23 +43,23 @@ public class EmpProfileBean extends BaseBean
          {
              employeeService.update(emp);
          }
-         if(emp.getPersonType().equals(PersonType.SYSTEM_USER) && emp.getSystemUserType().equals(SystemUserType.ADMIN))
+         if(emp.getPersonType().equals(PersonType.SYSTEM_USER) && emp.getEmployeeType().equals(SystemUserType.ADMIN))
          {
                 redirecting("adminDash");
          }
-         else if(emp.getPersonType().equals(PersonType.EMPLOYEE )&& emp.getSystemUserType().equals(SystemUserType.ADMIN ))
+         else if(emp.getPersonType().equals(PersonType.EMPLOYEE )&& emp.getEmployeeType().equals(SystemUserType.ADMIN ))
                  {
                     redirecting("officeDash"); 
                  }
-         else if(emp.getSystemUserType().equals(SystemUserType.PRINCIPAL))
+         else if(emp.getEmployeeType().equals(SystemUserType.PRINCIPAL))
          {
              redirecting("principalDash");
          }
-         else if(emp.getSystemUserType().equals(SystemUserType.HOD))
+         else if(emp.getEmployeeType().equals(SystemUserType.HOD))
          {
              redirecting("hodDash");
          }
-        else if(emp.getSystemUserType().equals(SystemUserType.EDUCATOR))
+        else if(emp.getEmployeeType().equals(SystemUserType.EDUCATOR))
          {
              redirecting("educatorDash");
          }
@@ -68,23 +68,23 @@ public class EmpProfileBean extends BaseBean
      
      public void cancel(Employee emp)
      {
-          if(emp.getPersonType().equals(PersonType.SYSTEM_USER) && emp.getSystemUserType().equals(SystemUserType.ADMIN))
+          if(emp.getPersonType().equals(PersonType.SYSTEM_USER) && emp.getEmployeeType().equals(SystemUserType.ADMIN))
          {
                 redirecting("adminDash");
          }
-         else if(emp.getPersonType().equals(PersonType.EMPLOYEE) && emp.getSystemUserType().equals(SystemUserType.ADMIN ))
+         else if(emp.getPersonType().equals(PersonType.EMPLOYEE) && emp.getEmployeeType().equals(SystemUserType.ADMIN ))
                  {
                     redirecting("officeDash"); 
                  }
-         else if(emp.getSystemUserType().equals(SystemUserType.PRINCIPAL))
+         else if(emp.getEmployeeType().equals(SystemUserType.PRINCIPAL))
          {
              redirecting("principalDash");
          }
-         else if(emp.getSystemUserType().equals(SystemUserType.HOD))
+         else if(emp.getEmployeeType().equals(SystemUserType.HOD))
          {
              redirecting("hodDash");
          }
-        else if(emp.getSystemUserType().equals(SystemUserType.EDUCATOR))
+        else if(emp.getEmployeeType().equals(SystemUserType.EDUCATOR))
          {
              redirecting("educatorDash");
          }

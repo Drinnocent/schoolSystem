@@ -32,7 +32,7 @@ public class SystemUserHelper {
                 systemUser.setLastName(employee.getLastName());
                 systemUser.setIdentityNumber(employee.getIdentityNumber());
                 systemUser.setPersonType(employee.getPersonType());
-                systemUser.setSystemUserType(employee.getSystemUserType());
+                systemUser.setSystemUserType(systemUser.getSystemUserType());
                 systemUser.setSystemUserStatus(SystemUserStatus.ACTIVE);
                 systemUser.setUsername("admin" + adminCount);
                 systemUser.setPassword("admin" + adminCount);
@@ -56,7 +56,7 @@ public class SystemUserHelper {
                 systemUser.setLastName(employee.getLastName());
                 systemUser.setIdentityNumber(employee.getIdentityNumber());
                 systemUser.setPersonType(employee.getPersonType());
-                systemUser.setSystemUserType(employee.getSystemUserType());
+                systemUser.setSystemUserType(systemUser.getSystemUserType());
                 systemUser.setSystemUserStatus(SystemUserStatus.ACTIVE);
                 systemUser.setUsername("user" + empCount);
                 systemUser.setPassword("password" + empCount);

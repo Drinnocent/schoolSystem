@@ -197,7 +197,7 @@ public class EmployeeBean extends BaseBean {
     }
     
       public void employeeTypeListener() {
-        if (employee.getSystemUserType().equals(SystemUserType.EDUCATOR) || employee.getSystemUserType().equals(SystemUserType.HOD) || employee.getSystemUserType().equals(SystemUserType.PRINCIPAL)) {
+        if (employee.getEmployeeType().equals(SystemUserType.EDUCATOR) || employee.getEmployeeType().equals(SystemUserType.HOD) || employee.getEmployeeType().equals(SystemUserType.PRINCIPAL)) {
             setVisible(true);
         } else {
             setVisible(false);

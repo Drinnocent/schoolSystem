@@ -31,19 +31,11 @@ public class School extends BaseEntity {
     @Column(name = "school_RegistrationNumber")
     private String registrationNumber;
 
-    @OneToMany(mappedBy = "school", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     List<Address> address = new ArrayList();
-    @OneToMany(mappedBy = "school", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     List<ContactDetail> contacts = new ArrayList();
-    @OneToMany(mappedBy = "school", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    List<Student> students = new ArrayList();
-    @OneToMany(mappedBy = "school", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    List<Employee> employees = new ArrayList();
-    @OneToMany(mappedBy = "school", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    List<Subject> subjects = new ArrayList();
-    @OneToMany(mappedBy = "school", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    List<Grade> grades = new ArrayList();
-    @OneToMany(mappedBy = "school", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     List<Facility> facilities = new ArrayList();
 
     public String getRegistrationNumber() {
@@ -69,5 +61,30 @@ public class School extends BaseEntity {
     public void setSchoolWebsite(String schoolWebsite) {
         this.schoolWebsite = schoolWebsite;
     }
+
+    public List<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
+    }
+
+    public List<ContactDetail> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<ContactDetail> contacts) {
+        this.contacts = contacts;
+    }
+
+    public List<Facility> getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(List<Facility> facilities) {
+        this.facilities = facilities;
+    }
+    
 
 }
