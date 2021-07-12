@@ -30,7 +30,7 @@ public class SystemAdminHelper {
         employee1.setEmployeeId("DI121415");
         employee1.setPersonType(PersonType.SYSTEM_USER);
         employee1.setSaceRegNumber("0201044");
-        employee1.setSystemUserType(SystemUserType.ADMIN);
+        employee1.setEmployeeType(EmployeeType.ADMIN);
 
         employeeRepository.save(employee1);
 
@@ -43,7 +43,7 @@ public class SystemAdminHelper {
         employee2.setEmployeeId("L1445415");
         employee2.setPersonType(PersonType.SYSTEM_USER);
         employee2.setSaceRegNumber("0201044");
-        employee2.setSystemUserType(SystemUserType.ADMIN);
+        employee2.setEmployeeType(EmployeeType.ADMIN);
         employeeRepository.save(employee2);
 
     }

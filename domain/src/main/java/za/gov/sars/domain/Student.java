@@ -20,7 +20,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 
-
 /**
  *
  * @author S2028389
@@ -32,24 +31,17 @@ public class Student extends Person {
 
     @Column(name = "Student_Number")
     private String studentNumber;
-
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "student_subject", joinColumns = {
         @JoinColumn(name = "student_id")}, inverseJoinColumns = {
         @JoinColumn(name = "subject_id")})
     private List<Subject> subjects = new ArrayList<>();
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Grade grade;
-
-    @OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Assessment> assessments = new ArrayList<>();
-
-    @OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Attendance> attendances = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private School school;
-   
-
     public String getStudentNumber() {
         return studentNumber;
     }
@@ -64,6 +56,30 @@ public class Student extends Person {
 
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public List<Assessment> getAssessments() {
+        return assessments;
+    }
+
+    public void setAssessments(List<Assessment> assessments) {
+        this.assessments = assessments;
+    }
+
+    public List<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(List<Attendance> attendances) {
+        this.attendances = attendances;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 
 }

@@ -30,15 +30,17 @@ public class Grade extends BaseEntity {
     private String name;
     @Column(name = "designation")
     private String designation;
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private Student student;
-    @OneToMany(mappedBy = "grade", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private List<Student> students = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     List<Subject> subject = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private Facility facility;
+    //@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    //private Facility facility;
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private List<Employee> employees = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private School school;
-    @OneToMany(mappedBy = "grade", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Assessment> assessments = new ArrayList<>();
 
     public String getName() {
@@ -56,5 +58,46 @@ public class Grade extends BaseEntity {
     public void setDesignation(String designation) {
         this.designation = designation;
     }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public List<Subject> getSubject() {
+        return subject;
+    }
+
+    public void setSubject(List<Subject> subject) {
+        this.subject = subject;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    public List<Assessment> getAssessments() {
+        return assessments;
+    }
+
+    public void setAssessments(List<Assessment> assessments) {
+        this.assessments = assessments;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+    
 
 }

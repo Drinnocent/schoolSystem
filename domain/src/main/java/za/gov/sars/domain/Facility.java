@@ -29,11 +29,11 @@ public class Facility extends BaseEntity {
     private String name;
     @Column(name = "facility_Location")
     private String location;
-    @OneToMany(mappedBy = "facility", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private List<Grade> grades = new ArrayList<>();
+   // @OneToMany(mappedBy = "facility", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+   // private List<Grade> grades = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private School school;
-    @OneToMany(mappedBy = "facility",cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     private List<Assessment> assessments=new ArrayList<>();
 
     public String getName() {
@@ -51,5 +51,22 @@ public class Facility extends BaseEntity {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    public List<Assessment> getAssessments() {
+        return assessments;
+    }
+
+    public void setAssessments(List<Assessment> assessments) {
+        this.assessments = assessments;
+    }
+    
 
 }

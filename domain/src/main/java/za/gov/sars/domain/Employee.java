@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
+import za.gov.sars.common.EmployeeType;
 import za.gov.sars.common.SystemUserType;
 
 /**
@@ -35,11 +36,11 @@ public class Employee extends Person {
     @Column(name = "sace_RegNumber")
     private String saceRegNumber;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+   /* @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "employee_grade", joinColumns = {
         @JoinColumn(name = "employee_id")}, inverseJoinColumns = {
         @JoinColumn(name = "grade_id")})
-    private List<Grade> grades = new ArrayList<>();
+    private List<Grade> grades = new ArrayList<>();**/
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "employee_subject", joinColumns = {
@@ -50,7 +51,7 @@ public class Employee extends Person {
     private School school;
     
     @Enumerated(EnumType.STRING)
-    private SystemUserType systemUserType;
+    private EmployeeType employeeType;
 
     public String getEmployeeId() {
         return employeeId;
@@ -68,13 +69,13 @@ public class Employee extends Person {
         this.saceRegNumber = saceRegNumber;
     }
 
-    public List<Grade> getGrades() {
+    /*public List<Grade> getGrades() {
         return grades;
     }
 
     public void setGrades(List<Grade> grades) {
         this.grades = grades;
-    }
+    }**/
 
     public List<Subject> getSubjects() {
         return subjects;
@@ -84,20 +85,30 @@ public class Employee extends Person {
         this.subjects = subjects;
     }
 
-    public void addGrade(Grade grade) {
+   /* public void addGrade(Grade grade) {
         this.grades.add(grade);
-    }
+    }**/
 
     public void addSubject(Subject subject) {
         this.subjects.add(subject);
     }
 
-    public SystemUserType getSystemUserType() {
-        return systemUserType;
+    public School getSchool() {
+        return school;
     }
 
-    public void setSystemUserType(SystemUserType systemUserType) {
-        this.systemUserType = systemUserType;
+    public void setSchool(School school) {
+        this.school = school;
     }
+
+    public EmployeeType getEmployeeType() {
+        return employeeType;
+    }
+
+    public void setEmployeeType(EmployeeType employeeType) {
+        this.employeeType = employeeType;
+    }
+
+   
 
 }

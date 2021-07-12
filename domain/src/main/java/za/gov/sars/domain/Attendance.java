@@ -47,4 +47,11 @@ public class Attendance extends BaseEntity {
         this.status = status;
     }
 
+    public Student getStudent() {
+        return student;
+    }
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
 }
