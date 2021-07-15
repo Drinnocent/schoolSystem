@@ -23,23 +23,23 @@ import za.gov.sars.common.PersonType;
  * @author S2028389
  */
 @MappedSuperclass
-public class Person  extends BaseEntity
-{
-    @Column(name="first_name")
+public class Person extends BaseEntity {
+
+    @Column(name = "first_name")
     private String firstName;
-    
-    @Column(name="lastName")
+
+    @Column(name = "lastName")
     private String lastName;
-    
-    @Column(name="identity_number")
+
+    @Column(name = "identity_number")
     private String identityNumber;
-    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    private List<Address> addressList=new ArrayList<>();
-    @OneToOne(optional=true, cascade=CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name="contact_detail")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Address> addressList = new ArrayList<>();
+    @OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "contact_detail")
     private ContactDetail contactDetail;
     @Enumerated(EnumType.STRING)
-    @Column(name="person_type")
+    @Column(name = "person_type")
     private PersonType personType;
 
     public PersonType getPersonType() {
@@ -89,11 +89,9 @@ public class Person  extends BaseEntity
     public void setContactDetail(ContactDetail contactDetail) {
         this.contactDetail = contactDetail;
     }
-    
-    public void addAddress(Address address)
-    {
-       this.addressList.add(address);
+
+    public void addAddress(Address address) {
+        this.addressList.add(address);
     }
-    
-    
+
 }

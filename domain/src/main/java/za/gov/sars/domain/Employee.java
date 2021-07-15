@@ -20,38 +20,37 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
 import za.gov.sars.common.EmployeeType;
-import za.gov.sars.common.SystemUserType;
 
 /**
  *
  * @author S2028389
  */
-@Entity
 @Audited
+@Entity
 @Table(name = "employee")
 public class Employee extends Person {
 
-    @Column(name = "employee_Id")
+    @Column(name = "employee_Id",unique = true)
     private String employeeId;
     @Column(name = "sace_RegNumber")
     private String saceRegNumber;
-
-   /* @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "employee_grade", joinColumns = {
         @JoinColumn(name = "employee_id")}, inverseJoinColumns = {
         @JoinColumn(name = "grade_id")})
-    private List<Grade> grades = new ArrayList<>();**/
-
+    private List<Grade> grades = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "employee_subject", joinColumns = {
         @JoinColumn(name = "employee_id")}, inverseJoinColumns = {
         @JoinColumn(name = "subject_id")})
     private List<Subject> subjects = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private School school;
-    
     @Enumerated(EnumType.STRING)
+    @Column(name="employee_type")
     private EmployeeType employeeType;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private School school;
+
+    
 
     public String getEmployeeId() {
         return employeeId;
@@ -69,14 +68,6 @@ public class Employee extends Person {
         this.saceRegNumber = saceRegNumber;
     }
 
-    /*public List<Grade> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(List<Grade> grades) {
-        this.grades = grades;
-    }**/
-
     public List<Subject> getSubjects() {
         return subjects;
     }
@@ -85,10 +76,9 @@ public class Employee extends Person {
         this.subjects = subjects;
     }
 
-   /* public void addGrade(Grade grade) {
-        this.grades.add(grade);
-    }**/
-
+    /* public void addGrade(Grade grade) {
+     this.grades.add(grade);
+     }**/
     public void addSubject(Subject subject) {
         this.subjects.add(subject);
     }
@@ -108,7 +98,5 @@ public class Employee extends Person {
     public void setEmployeeType(EmployeeType employeeType) {
         this.employeeType = employeeType;
     }
-
-   
 
 }

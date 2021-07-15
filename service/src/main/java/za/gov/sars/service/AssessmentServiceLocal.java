@@ -13,17 +13,23 @@ import za.gov.sars.domain.Assessment;
  * @author S2028389
  */
 public interface AssessmentServiceLocal {
+
     Assessment save(Assessment assessment);
+
     Assessment findById(Long id);
+
     Assessment update(Assessment assessment);
+
     void deleteAll();
+
     Assessment deleteById(Long id);
-    
+
     List<Assessment> findAssessmentByAssessmentNum(String assessmentNum);
-    
+
     List<Assessment> listAll();
-    
+
     boolean isExist(Assessment assessment);
+
     long count();
-    
+
 }

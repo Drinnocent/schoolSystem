@@ -27,79 +27,74 @@ import za.gov.sars.service.SubjectServiceLocal;
 @ManagedBean
 @ViewScoped
 public class FacilityBean extends BaseBean {
+
     @Autowired
     private FacilityServiceLocal facilityService;
     @Autowired
     private GradeServiceLocal gradeService;
-    
+
     @Autowired
     private SubjectServiceLocal subjectService;
-    
+
     private Facility facility;
-    
-     private List<Facility> facilities=new ArrayList<>();
-     private List<Grade> grades=new ArrayList<>();
-     private List<Subject> subjects=new ArrayList<>();
-    
+
+    private List<Facility> facilities = new ArrayList<>();
+    private List<Grade> grades = new ArrayList<>();
+    private List<Subject> subjects = new ArrayList<>();
+
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         this.resetView(false).setList(true);
-        facilities=facilityService.listAll();
-        grades=gradeService.listAll();
-        subjects=subjectService.listAll();
+        facilities = facilityService.listAll();
+        grades = gradeService.listAll();
+        subjects = subjectService.listAll();
     }
-    
-    
-    
-    public void addOrUpdate(Facility fac){
+
+    public void addOrUpdate(Facility fac) {
         this.resetView(false).setAdd(true);
-        if(fac != null){
-           // fac.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+        if (fac != null) {
+            // fac.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             fac.setUpdatedDate(new Date());
             facility = fac;
-        }
-        else{
+        } else {
             facility = new Facility();
-           // facility.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            // facility.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             facility.setCreatedDate(new Date());
-            
-            
+
             facilities.add(0, facility);
         }
     }
-    
-    public void save(Facility fac){
-        if(fac.getId() != null){
+
+    public void save(Facility fac) {
+        if (fac.getId() != null) {
             facilityService.update(fac);
-        }
-        else{
+        } else {
             facilityService.save(fac);
         }
         this.resetView(false).setList(true);
     }
-    
-    public void delete(Facility fac){
+
+    public void delete(Facility fac) {
         facilityService.deleteById(fac.getId());
         synchronize(fac);
         this.resetView(false).setList(true);
     }
-    
-    public void synchronize(Facility emp){
+
+    public void synchronize(Facility emp) {
         Iterator<Facility> facilityList = facilities.iterator();
-        while(facilityList.hasNext()){
-            if(facilityList.next().getId().equals(emp.getId())){
+        while (facilityList.hasNext()) {
+            if (facilityList.next().getId().equals(emp.getId())) {
                 facilityList.remove();
             }
         }
     }
-    
-    public void cancel(Facility fac){
-        if(fac.getId()==null){
-        if(facilities.contains(fac)){
-            facilities.remove(fac);
-        }
-        this.resetView(false).setList(true);
+
+    public void cancel(Facility fac) {
+        if (fac.getId() == null) {
+            if (facilities.contains(fac)) {
+                facilities.remove(fac);
+            }
+            this.resetView(false).setList(true);
         }
     }
 
@@ -134,7 +129,5 @@ public class FacilityBean extends BaseBean {
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
-    
-    
-    
+
 }

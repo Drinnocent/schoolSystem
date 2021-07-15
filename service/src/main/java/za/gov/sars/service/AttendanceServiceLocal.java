@@ -12,19 +12,24 @@ import za.gov.sars.domain.Attendance;
  *
  * @author S2028389
  */
-public interface AttendanceServiceLocal
-{
+public interface AttendanceServiceLocal {
+
     Attendance save(Attendance attendance);
+
     Attendance findById(Long id);
+
     Attendance update(Attendance attendance);
+
     void deleteAll();
-   Attendance deleteById(Long id);
-    
+
+    Attendance deleteById(Long id);
+
     List<Attendance> findAttendanceByAttendanceNum(String attendanceNum);
-    
+
     List<Attendance> listAll();
-    
+
     boolean isExist(Attendance attendance);
+
     long count();
-    
+
 }

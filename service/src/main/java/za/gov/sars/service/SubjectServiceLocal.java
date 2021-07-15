@@ -12,20 +12,24 @@ import za.gov.sars.domain.Subject;
  *
  * @author S2028389
  */
-public interface SubjectServiceLocal
-{
+public interface SubjectServiceLocal {
+
     Subject save(Subject subject);
+
     Subject findById(Long id);
+
     Subject update(Subject subject);
+
     void deleteAll();
-   Subject deleteById(Long id);
-    
+
+    Subject deleteById(Long id);
+
     List<Subject> findSubjectBySubjectNum(String subjectNum);
-    
+
     List<Subject> listAll();
-    
+
     boolean isExist(Subject subject);
+
     long count();
-     
-    
+
 }

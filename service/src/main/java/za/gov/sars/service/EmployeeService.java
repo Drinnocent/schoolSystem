@@ -16,9 +16,8 @@ import za.gov.sars.persistence.EmployeeRepository;
  * @author S2028389
  */
 @Service
-public class EmployeeService implements EmployeeServiceLocal
-{
-    
+public class EmployeeService implements EmployeeServiceLocal {
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -47,12 +46,13 @@ public class EmployeeService implements EmployeeServiceLocal
     @Override
     public Employee deleteById(Long id) {
         Employee emp = findById(id);
-        if(emp != null){
+        if (emp != null) {
             employeeRepository.deleteById(id);
         }
         return emp;
     }
-   @Override
+
+    @Override
     public List<Employee> findEmployeeByEmployeeNum(String employeeNum) {
         //Advanced code to be demonstrated later
         return employeeRepository.findAll();
@@ -65,7 +65,7 @@ public class EmployeeService implements EmployeeServiceLocal
 
     @Override
     public boolean isExist(Employee employee) {
-         return employeeRepository.findById(employee.getId()) != null;
+        return employeeRepository.findById(employee.getId()) != null;
     }
 
     @Override
@@ -73,10 +73,4 @@ public class EmployeeService implements EmployeeServiceLocal
         return employeeRepository.count();
     }
 
-    
-
-    
-
-    
-    
 }

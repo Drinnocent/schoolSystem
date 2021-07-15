@@ -6,6 +6,7 @@
 package za.gov.sars.service;
 
 import java.util.Date;
+import za.gov.sars.common.EmployeeType;
 import za.gov.sars.common.PersonType;
 import za.gov.sars.common.SystemUserStatus;
 import za.gov.sars.common.SystemUserType;
@@ -23,7 +24,7 @@ public class SystemUserHelper {
     public static void addSystemUser(LoginRepository loginRepository, EmployeeRepository employeeRepository) {
         int adminCount = 0;
         for (Employee employee : employeeRepository.findAll()) {
-            if (employee.getPersonType().equals(PersonType.SYSTEM_USER) && employee.getPersonType().equals(SystemUserType.ADMIN)) {
+            if (employee.getPersonType().equals(PersonType.SYSTEM_USER) && employee.getPersonType().equals(EmployeeType.ADMIN)) {
                 SystemUser systemUser = new SystemUser();
 
                 systemUser.setCreatedBy("Test");
@@ -47,7 +48,7 @@ public class SystemUserHelper {
         int empCount = 0;
 
         for (Employee employee : employeeRepository.findAll()) {
-            if (employee.getPersonType().equals(PersonType.EMPLOYEE) || employee.getPersonType().equals(SystemUserType.ADMIN) || employee.getPersonType().equals(SystemUserType.EDUCATOR) || employee.getPersonType().equals(SystemUserType.HOD) || employee.getPersonType().equals(SystemUserType.PRINCIPAL)) {
+            if (employee.getPersonType().equals(PersonType.EMPLOYEE) || employee.getPersonType().equals(EmployeeType.ADMIN) || employee.getPersonType().equals(EmployeeType.EDUCATOR) || employee.getPersonType().equals(EmployeeType.HOD) || employee.getPersonType().equals(EmployeeType.PRINCIPAL)) {
                 SystemUser systemUser = new SystemUser();
 
                 systemUser.setCreatedBy("Test");

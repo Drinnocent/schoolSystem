@@ -31,11 +31,12 @@ public class Assessment extends BaseEntity {
     private double passMark;
     @Column(name = "total_Mark")
     private double totalMark;
-    
-    /*private Date releaseDate;
+    @Column(name = "release_Date")
+    private Date releaseDate;
+    @Column(name = "due_date")
     private Date dueDate;
+    @Column(name = "submission_Date")
     private Date submissionDate;
-    private String assessmentType;**/
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Subject subject;
@@ -77,9 +78,8 @@ public class Assessment extends BaseEntity {
     public void setTotalMark(double totalMark) {
         this.totalMark = totalMark;
     }
-    
 
-   /* public Date getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
@@ -102,15 +102,6 @@ public class Assessment extends BaseEntity {
     public void setSubmissionDate(Date submissionDate) {
         this.submissionDate = submissionDate;
     }
-
-    public String getAssessmentType() {
-        return assessmentType;
-    }
-
-    public void setAssessmentType(String assessmentType) {
-        this.assessmentType = assessmentType;
-    }**/
-
     public Subject getSubject() {
         return subject;
     }
@@ -142,6 +133,7 @@ public class Assessment extends BaseEntity {
     public void setFacility(Facility facility) {
         this.facility = facility;
     }
-
+    
+    
 
 }

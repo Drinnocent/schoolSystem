@@ -16,10 +16,8 @@ import za.gov.sars.persistence.AttendanceRepository;
  * @author S2028389
  */
 @Service
-public class AttendanceService implements AttendanceServiceLocal
-{
-    
-    
+public class AttendanceService implements AttendanceServiceLocal {
+
     @Autowired
     private AttendanceRepository attendanceRepository;
 
@@ -48,12 +46,13 @@ public class AttendanceService implements AttendanceServiceLocal
     @Override
     public Attendance deleteById(Long id) {
         Attendance att = findById(id);
-        if(att != null){
-           attendanceRepository.deleteById(id);
+        if (att != null) {
+            attendanceRepository.deleteById(id);
         }
         return att;
     }
-   @Override
+
+    @Override
     public List<Attendance> findAttendanceByAttendanceNum(String attendanceNum) {
         //Advanced code to be demonstrated later
         return attendanceRepository.findAll();
@@ -66,7 +65,7 @@ public class AttendanceService implements AttendanceServiceLocal
 
     @Override
     public boolean isExist(Attendance attendance) {
-         return attendanceRepository.findById(attendance.getId()) != null;
+        return attendanceRepository.findById(attendance.getId()) != null;
     }
 
     @Override
@@ -74,5 +73,4 @@ public class AttendanceService implements AttendanceServiceLocal
         return attendanceRepository.count();
     }
 
-    
 }

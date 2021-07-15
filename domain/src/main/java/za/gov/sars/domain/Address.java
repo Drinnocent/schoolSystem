@@ -28,22 +28,16 @@ public class Address extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "address_Type")
     private AddressType addressType;
-
     @Column(name = "addressline_1")
     private String addressLine1;
-
     @Column(name = "addressline_2")
     private String addressLine2;
-
     @Column(name = "street")
     private String street;
-
     @Column(name = "are")
     private String area;
-
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private School school;
-    
 
     public String getAddressLine1() {
         return addressLine1;

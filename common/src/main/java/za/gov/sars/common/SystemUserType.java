@@ -11,13 +11,10 @@ package za.gov.sars.common;
  */
 public enum SystemUserType {
 
-    GENERAL_WORKER("General Staff"),
+    SYSTEM_ADMIN("System_Admin"),
     LEARNER("Learner"),
-    EDUCATOR("Educator"),
-    PRINCIPAL("Principal"),
-    HOD("Head of Department"),
-    CLERK("Clerk"),
-    ADMIN("Administrator");
+    EMPLOYEE("LEARNER");
+   
 
     private final String displayname;
 

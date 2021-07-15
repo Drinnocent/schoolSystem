@@ -16,9 +16,8 @@ import za.gov.sars.persistence.FacilityRepository;
  * @author S2028389
  */
 @Service
-public class FacilityService implements FacilityServiceLocal
-{
-    
+public class FacilityService implements FacilityServiceLocal {
+
     @Autowired
     private FacilityRepository facilityRepository;
 
@@ -41,18 +40,19 @@ public class FacilityService implements FacilityServiceLocal
 
     @Override
     public void deleteAll() {
-       facilityRepository.deleteAll();
+        facilityRepository.deleteAll();
     }
 
     @Override
     public Facility deleteById(Long id) {
-       Facility fa = findById(id);
-        if(fa != null){
+        Facility fa = findById(id);
+        if (fa != null) {
             facilityRepository.deleteById(id);
         }
         return fa;
     }
-   @Override
+
+    @Override
     public List<Facility> findFacilityByFacilityNum(String facilityNum) {
         //Advanced code to be demonstrated later
         return facilityRepository.findAll();
@@ -65,7 +65,7 @@ public class FacilityService implements FacilityServiceLocal
 
     @Override
     public boolean isExist(Facility facility) {
-         return facilityRepository.findById(facility.getId()) != null;
+        return facilityRepository.findById(facility.getId()) != null;
     }
 
     @Override
@@ -73,5 +73,4 @@ public class FacilityService implements FacilityServiceLocal
         return facilityRepository.count();
     }
 
-    
 }

@@ -85,6 +85,5 @@ public class School extends BaseEntity {
     public void setFacilities(List<Facility> facilities) {
         this.facilities = facilities;
     }
-    
 
 }

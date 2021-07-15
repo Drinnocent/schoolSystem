@@ -12,24 +12,24 @@ import za.gov.sars.domain.Student;
  *
  * @author S2028389
  */
-public interface StudentServiceLocal 
-{
- 
-    Student save(Student student);
-    Student findById(Long id);
-    Student update(Student student);
-    void deleteAll();
-    Student deleteById(Long id);
-    
-    List<Student> findStudentByStudentNum(String studentNum);
-    
-    List<Student> listAll();
-    
-    boolean isExist(Student student);
-    long count();
-     
-    
-    
-}
-    
+public interface StudentServiceLocal {
 
+    Student save(Student student);
+
+    Student findById(Long id);
+
+    Student update(Student student);
+
+    void deleteAll();
+
+    Student deleteById(Long id);
+
+    List<Student> findStudentByStudentNum(String studentNum);
+
+    List<Student> listAll();
+
+    boolean isExist(Student student);
+
+    long count();
+
+}

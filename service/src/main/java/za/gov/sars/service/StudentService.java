@@ -16,14 +16,14 @@ import za.gov.sars.persistence.StudentRepository;
  * @author S2028389
  */
 @Service
-public class StudentService implements StudentServiceLocal{
+public class StudentService implements StudentServiceLocal {
 
     @Autowired
     private StudentRepository studentRepository;
-    
+
     @Override
     public Student save(Student student) {
-       return studentRepository.save(student);
+        return studentRepository.save(student);
     }
 
     @Override
@@ -42,13 +42,13 @@ public class StudentService implements StudentServiceLocal{
     @Override
     public void deleteAll() {
         studentRepository.deleteAll();
-       
+
     }
 
     @Override
     public Student deleteById(Long id) {
-         Student stu = findById(id);
-        if(stu != null){
+        Student stu = findById(id);
+        if (stu != null) {
             studentRepository.deleteById(id);
         }
         return stu;
@@ -56,22 +56,22 @@ public class StudentService implements StudentServiceLocal{
 
     @Override
     public List<Student> findStudentByStudentNum(String studentNum) {
-         return studentRepository.findAll();
+        return studentRepository.findAll();
     }
 
     @Override
     public List<Student> listAll() {
-         return studentRepository.findAll();
+        return studentRepository.findAll();
     }
 
     @Override
     public boolean isExist(Student student) {
-       return studentRepository.findById(student.getId()) != null;
+        return studentRepository.findById(student.getId()) != null;
     }
 
     @Override
     public long count() {
         return studentRepository.count();
     }
-    
+
 }
