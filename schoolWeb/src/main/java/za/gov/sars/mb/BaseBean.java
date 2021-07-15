@@ -24,31 +24,30 @@ import org.springframework.web.jsf.FacesContextUtils;
  */
 // if you want things to be impleemnted inn form of bytes and through network
 public class BaseBean extends SpringBeanAutowiringSupport implements Serializable {
-    
+
  //  @ManagedProperty(value="#{activeUser")
-   //private ActiveUser activeUser;
+    //private ActiveUser activeUser;
     private boolean add;
     private boolean list;
     private boolean visible;
     private List<String> errorCollectionMsg = new ArrayList<>();
 
-    
     public void init()//this method means initialzation
     {
         FacesContextUtils.getRequiredWebApplicationContext(FacesContext.getCurrentInstance()).getAutowireCapableBeanFactory().autowireBean(this);//we call this thing clearing 
-        FacesContext faceContext=FacesContext.getCurrentInstance(); //to clear the cache
-        HttpServletResponse response=(HttpServletResponse) faceContext.getExternalContext().getResponse();
-        response.setHeader("Pragma","no-cache");
-        response.setHeader("Cache-Control","no-cache");
-        response.setHeader("Cache-Control","no-store");
-        response.setHeader("Cache-Control","must-revalidate");
-        response.setHeader("Expire","Mon, 8 Aug 2010 10:00:00 GMT");
-        
+        FacesContext faceContext = FacesContext.getCurrentInstance(); //to clear the cache
+        HttpServletResponse response = (HttpServletResponse) faceContext.getExternalContext().getResponse();
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Cache-Control", "no-store");
+        response.setHeader("Cache-Control", "must-revalidate");
+        response.setHeader("Expire", "Mon, 8 Aug 2010 10:00:00 GMT");
+
     }
-        public boolean isList() {
+
+    public boolean isList() {
         return list;
-        }
-    
+    }
 
     public void setList(boolean list) {
         this.list = list;
@@ -75,24 +74,25 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         this.setList(reset);
         return this;
     }
-/*
-    public ActiveUser getActiveUser() {
-        return activeUser;
-    }
+    /*
+     public ActiveUser getActiveUser() {
+     return activeUser;
+     }
 
-    public void setActiveUser(ActiveUser activeUser) {
-        this.activeUser = activeUser;
-    }
+     public void setActiveUser(ActiveUser activeUser) {
+     this.activeUser = activeUser;
+     }
 
-    public void isUserLoggedIn(String redirectPage) {
-       // if (!getActiveUser().isUserLoginIndicator()) {
-            try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(redirectPage);
-            } catch (IOException ex) {
-                Logger.getLogger(BaseBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        //}
-    }**/
+     public void isUserLoggedIn(String redirectPage) {
+     // if (!getActiveUser().isUserLoginIndicator()) {
+     try {
+     FacesContext.getCurrentInstance().getExternalContext().redirect(redirectPage);
+     } catch (IOException ex) {
+     Logger.getLogger(BaseBean.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     //}
+     }**/
+
     public void redirect(String redirectPage) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(redirectPage);
@@ -105,14 +105,14 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         if (session != null) {
             session.invalidate();
-           // getActiveUser().setUserLoginIndicator(Boolean.FALSE);
+            // getActiveUser().setUserLoginIndicator(Boolean.FALSE);
         }
     }
 
     public boolean isUserSessionExpired() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         if (session == null) {
-          //  getActiveUser().setUserLoginIndicator(Boolean.FALSE);
+            //  getActiveUser().setUserLoginIndicator(Boolean.FALSE);
             return true;
         }
         return false;
@@ -126,20 +126,19 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         return this;
     }
 
-   /* public boolean isAdminUser() {
-        return getActiveUser().getPersonType().equals(PersonType.SYSTEM_USER);
-    }
+    /* public boolean isAdminUser() {
+     return getActiveUser().getPersonType().equals(PersonType.SYSTEM_USER);
+     }
 
-    public boolean isEmployee() {
-        return getActiveUser().getPersonType().equals(PersonType.EMPLOYEE);
-    }
+     public boolean isEmployee() {
+     return getActiveUser().getPersonType().equals(PersonType.EMPLOYEE);
+     }
 
-    public boolean isLearner() {
-        return getActiveUser().getPersonType().equals(PersonType.LEARNER);
-    }
-**/
-    
-        public void reRoute(String page) {
+     public boolean isLearner() {
+     return getActiveUser().getPersonType().equals(PersonType.LEARNER);
+     }
+     **/
+    public void reRoute(String page) {
         try {
             StringBuilder builder = new StringBuilder(page);
             builder.append(".xhtml");
@@ -158,8 +157,7 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
             Logger.getLogger(BaseBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     public void addInformationMessage(String... detail) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -177,6 +175,7 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         FacesContext.getCurrentInstance().addMessage(null, message);
 
     }
+
     public void addErrorMessage(String detail) {
 
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", detail);
@@ -184,6 +183,7 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         FacesContext.getCurrentInstance().addMessage(null, message);
 
     }
+
     public void addErrorMessage(String... detail) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -202,8 +202,6 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
 
     }
 
-
-
     public void addWarningMessage(String detail) {
 
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "", detail);
@@ -211,8 +209,6 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         FacesContext.getCurrentInstance().addMessage(null, message);
 
     }
-
-
 
     public void addWarningMessage(String... detail) {
 
@@ -232,7 +228,6 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
 
     }
 
-
     public void addError(String... message) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -248,6 +243,7 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         this.getErrorCollectionMsg().add(stringBuilder.toString());
 
     }
+
     public void addInfomation(String... message) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -263,6 +259,7 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         this.getErrorCollectionMsg().add(stringBuilder.toString());
 
     }
+
     public void addWarning(String... message) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -278,36 +275,28 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         this.getErrorCollectionMsg().add(stringBuilder.toString());
 
     }
-    
-    
-    
-/**
 
+    /**
+     *
      * @return the errorCollectionMsg
-
+     *
      */
-
     public List<String> getErrorCollectionMsg() {
 
         return errorCollectionMsg;
 
     }
 
-
-
     /**
-
+     *
      * @param errorCollectionMsg the errorCollectionMsg to set
-
+     *
      */
-
     public void setErrorCollectionMsg(List<String> errorCollectionMsg) {
 
         this.errorCollectionMsg = errorCollectionMsg;
 
     }
-
-
 
     public void addErrorCollectionMsg(String message) {
 
@@ -315,8 +304,4 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
 
     }
 
-
-
 }
-    
-

@@ -9,16 +9,17 @@ package za.gov.sars.common;
  *
  * @author S2028389
  */
-public enum SystemUserStatus 
-{
-    
-    ACTIVE("Active"),
-    INACTIVE("Inactive"),
-    SUSPEDEND("Suspended");
-    
-    private final String displayName;
+public enum AttendanceStatus {
 
-    SystemUserStatus(final String displayName) {
+    AVAILABLE("available_Status"),
+    SESSSIONED("IN SESSION"),
+    CANCELLED("Cancelled"),
+    POSTPONED("Postponed");
+
+    private final String displayName;
+    
+
+AttendanceStatus(final String displayName) {
         this.displayName = displayName;
     }
 
@@ -27,6 +28,5 @@ public enum SystemUserStatus
         return  displayName ;
     }
 
-    
     
 }

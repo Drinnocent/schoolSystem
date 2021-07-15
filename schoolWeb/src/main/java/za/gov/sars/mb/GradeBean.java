@@ -144,6 +144,5 @@ public class GradeBean extends BaseBean {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
-    
 
 }

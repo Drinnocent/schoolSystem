@@ -16,9 +16,8 @@ import za.gov.sars.persistence.AssessmentRepository;
  * @author S2028389
  */
 @Service
-public class AssessmentService implements AssessmentServiceLocal
-{
-    
+public class AssessmentService implements AssessmentServiceLocal {
+
     @Autowired
     private AssessmentRepository assessmentRepository;
 
@@ -46,13 +45,14 @@ public class AssessmentService implements AssessmentServiceLocal
 
     @Override
     public Assessment deleteById(Long id) {
-      Assessment ass = findById(id);
-        if(ass != null){
+        Assessment ass = findById(id);
+        if (ass != null) {
             assessmentRepository.deleteById(id);
         }
         return ass;
     }
-   @Override
+
+    @Override
     public List<Assessment> findAssessmentByAssessmentNum(String assessmentNum) {
         //Advanced code to be demonstrated later
         return assessmentRepository.findAll();
@@ -65,7 +65,7 @@ public class AssessmentService implements AssessmentServiceLocal
 
     @Override
     public boolean isExist(Assessment assessment) {
-         return assessmentRepository.findById(assessment.getId()) != null;
+        return assessmentRepository.findById(assessment.getId()) != null;
     }
 
     @Override
@@ -73,5 +73,4 @@ public class AssessmentService implements AssessmentServiceLocal
         return assessmentRepository.count();
     }
 
-    
 }

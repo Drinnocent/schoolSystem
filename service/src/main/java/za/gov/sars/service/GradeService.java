@@ -16,9 +16,8 @@ import za.gov.sars.persistence.GradeRepository;
  * @author S2028389
  */
 @Service
-public class GradeService implements GradeServiceLocal
-{
-    
+public class GradeService implements GradeServiceLocal {
+
     @Autowired
     private GradeRepository gradeRepository;
 
@@ -47,13 +46,14 @@ public class GradeService implements GradeServiceLocal
 
     @Override
     public Grade deleteById(Long id) {
-       Grade gr = findById(id);
-        if(gr != null){
+        Grade gr = findById(id);
+        if (gr != null) {
             gradeRepository.deleteById(id);
         }
         return gr;
     }
-   @Override
+
+    @Override
     public List<Grade> findGradeByGradeNum(String gradeNum) {
         //Advanced code to be demonstrated later
         return gradeRepository.findAll();
@@ -66,7 +66,7 @@ public class GradeService implements GradeServiceLocal
 
     @Override
     public boolean isExist(Grade grade) {
-         return gradeRepository.findById(grade.getId()) != null;
+        return gradeRepository.findById(grade.getId()) != null;
     }
 
     @Override
@@ -74,5 +74,4 @@ public class GradeService implements GradeServiceLocal
         return gradeRepository.count();
     }
 
-    
 }

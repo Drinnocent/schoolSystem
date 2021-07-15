@@ -13,19 +13,23 @@ import za.gov.sars.domain.School;
  * @author S2028389
  */
 public interface SchoolServiceLocal {
-    
-    
+
     School save(School school);
+
     School findById(Long id);
+
     School update(School school);
+
     void deleteAll();
+
     School deleteById(Long id);
-    
+
     List<School> findSchoolBySchoolNum(String schooNum);
-    
+
     List<School> listAll();
-    
+
     boolean isExist(School school);
+
     long count();
-    
+
 }

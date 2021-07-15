@@ -12,14 +12,20 @@ import za.gov.sars.domain.SystemUser;
  *
  * @author S2028389
  */
-public interface LoginServiceLocal
-{
+public interface LoginServiceLocal {
+
     public SystemUser logUserIn(String username, String password);
+
     public boolean isUserExisting(String username);
+
     SystemUser findById(Long Id);
+
     SystemUser update(SystemUser systemUser);
+
     void deleteById(Long id);
+
     void deleteAll();
+
     List<SystemUser> listAll();
-    
+
 }

@@ -16,8 +16,8 @@ import za.gov.sars.persistence.LoginRepository;
  * @author S2028389
  */
 @Service
-public class LoginService implements LoginServiceLocal
-{
+public class LoginService implements LoginServiceLocal {
+
     @Autowired
     private LoginRepository loginRepository;
 
@@ -33,6 +33,7 @@ public class LoginService implements LoginServiceLocal
         }
         return systemUser;
     }
+
     @Override
     public boolean isUserExisting(String username) {
         int count = 0;
@@ -55,12 +56,12 @@ public class LoginService implements LoginServiceLocal
 
     @Override
     public SystemUser update(SystemUser systemUser) {
-     return loginRepository.save(systemUser);
+        return loginRepository.save(systemUser);
     }
 
     @Override
     public void deleteById(Long id) {
-       loginRepository.deleteById(id);
+        loginRepository.deleteById(id);
     }
 
     @Override
@@ -70,8 +71,7 @@ public class LoginService implements LoginServiceLocal
 
     @Override
     public List<SystemUser> listAll() {
-      return loginRepository.findAll();
+        return loginRepository.findAll();
     }
 
-    
 }

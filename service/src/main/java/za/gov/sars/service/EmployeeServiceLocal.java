@@ -12,21 +12,24 @@ import za.gov.sars.domain.Employee;
  *
  * @author S2028389
  */
-public interface EmployeeServiceLocal 
-{
+public interface EmployeeServiceLocal {
+
     Employee save(Employee employee);
+
     Employee findById(Long id);
+
     Employee update(Employee employee);
+
     void deleteAll();
+
     Employee deleteById(Long id);
-    
+
     List<Employee> findEmployeeByEmployeeNum(String employeeNum);
-    
+
     List<Employee> listAll();
-    
+
     boolean isExist(Employee employee);
+
     long count();
-     
-    
-    
+
 }

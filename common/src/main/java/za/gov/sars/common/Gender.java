@@ -9,21 +9,20 @@ package za.gov.sars.common;
  *
  * @author S2028389
  */
-public enum SystemUserType {
-
-    SYSTEM_ADMIN("System_Admin"),
-    LEARNER("Learner"),
-    EMPLOYEE("LEARNER");
-   
-
-    private final String displayname;
-
-    SystemUserType(final String displayName) {
-        this.displayname = displayName;
+public enum Gender {
+    MALE("Male"),
+    FEMALE("Female");
+    
+    private final String displayName;
+    
+    Gender(final String displayName)
+    {
+        this.displayName=displayName;
     }
 
+    @Override
     public String toString() {
-        return this.displayname;
+        return  displayName ;
     }
-
+    
 }

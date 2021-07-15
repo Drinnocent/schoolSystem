@@ -12,21 +12,24 @@ import za.gov.sars.domain.Facility;
  *
  * @author S2028389
  */
+public interface FacilityServiceLocal {
 
-public interface FacilityServiceLocal
-{
-    
     Facility save(Facility facility);
+
     Facility findById(Long id);
+
     Facility update(Facility facility);
+
     void deleteAll();
-   Facility deleteById(Long id);
-    
+
+    Facility deleteById(Long id);
+
     List<Facility> findFacilityByFacilityNum(String facilityNum);
-    
+
     List<Facility> listAll();
-    
+
     boolean isExist(Facility facility);
+
     long count();
-    
+
 }

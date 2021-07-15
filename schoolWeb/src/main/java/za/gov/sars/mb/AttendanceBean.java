@@ -32,8 +32,8 @@ import za.gov.sars.service.SubjectServiceLocal;
  */
 @ManagedBean
 @ViewScoped
-public class AttendanceBean extends BaseBean{
-    
+public class AttendanceBean extends BaseBean {
+
     @Autowired
     private AttendanceServiceLocal attendanceService;
     @Autowired
@@ -46,82 +46,70 @@ public class AttendanceBean extends BaseBean{
     private GradeServiceLocal gradeService;
     @Autowired
     private EmployeeServiceLocal employeeService;
-    
-   List<Attendance> attendances=new ArrayList<>();
-   List<Student> students=new ArrayList<>();
-   private Subject subject;
-   private Facility facility;
-   private Grade grade;
-   private Employee employee;
-   
-    
+
+    List<Attendance> attendances = new ArrayList<>();
+    List<Student> students = new ArrayList<>();
+    private Subject subject;
+    private Facility facility;
+    private Grade grade;
+    private Employee employee;
+
     private Attendance attendance;
-    
+
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         this.resetView(false).setList(true);
-        
-        attendances=attendanceService.listAll();
-        students=studentService.listAll();
-        subject=subjectService.findById(Long.MIN_VALUE);
-        facility=facilityService.findById(Long.MIN_VALUE);
-        grade=gradeService.findById(Long.MIN_VALUE);
-        employee=employeeService.findById(Long.MIN_VALUE);
-        
-        
+
+        attendances = attendanceService.listAll();
+        students = studentService.listAll();
+        subject = subjectService.findById(Long.MIN_VALUE);
+        facility = facilityService.findById(Long.MIN_VALUE);
+        grade = gradeService.findById(Long.MIN_VALUE);
+        employee = employeeService.findById(Long.MIN_VALUE);
+
     }
-    
-    
-    
-    
-    public void addOrUpdate(Attendance att){
+
+    public void addOrUpdate(Attendance att) {
         this.resetView(false).setAdd(true);
-        if(att != null){
-          //  att.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+        if (att != null) {
+            //  att.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             att.setUpdatedDate(new Date());
             attendance = att;
-        }
-        else{
-           attendance = new Attendance();
-           // attendance.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
-           attendance.setCreatedDate(new Date());
-            
-           
-      
-            
-            
-           attendances.add(0, attendance);
+        } else {
+            attendance = new Attendance();
+            // attendance.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            attendance.setCreatedDate(new Date());
+
+            attendances.add(0, attendance);
         }
     }
-    
-    public void save(Attendance att){
-        if(att.getId() != null){
+
+    public void save(Attendance att) {
+        if (att.getId() != null) {
             attendanceService.update(att);
-        }
-        else{
+        } else {
             attendanceService.save(att);
         }
         this.resetView(false).setList(true);
     }
-    
-    public void delete(Attendance att){
+
+    public void delete(Attendance att) {
         attendanceService.deleteById(att.getId());
         synchronize(att);
         this.resetView(false).setList(true);
     }
-    
-    public void synchronize(Attendance att){
-        Iterator<Attendance> attendanceList =attendances.iterator();
-        while(attendanceList.hasNext()){
-            if(attendanceList.next().getId().equals(att.getId())){
+
+    public void synchronize(Attendance att) {
+        Iterator<Attendance> attendanceList = attendances.iterator();
+        while (attendanceList.hasNext()) {
+            if (attendanceList.next().getId().equals(att.getId())) {
                 attendanceList.remove();
             }
         }
     }
-    
-    public void cancel(Attendance att){
-        if(attendances.contains(att)){
+
+    public void cancel(Attendance att) {
+        if (attendances.contains(att)) {
             attendances.remove(att);
         }
         this.resetView(false).setList(true);
@@ -182,6 +170,5 @@ public class AttendanceBean extends BaseBean{
     public void setAttendance(Attendance attendance) {
         this.attendance = attendance;
     }
-    
-    
+
 }

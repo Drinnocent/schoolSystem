@@ -18,52 +18,41 @@ import za.gov.sars.service.StudentService;
  */
 @ManagedBean
 @ViewScoped
-public class StudentProfileBean extends BaseBean{
+public class StudentProfileBean extends BaseBean {
+
     @Autowired
     private StudentService studentService;
-    
-    
-     
-     private Student student;
-   
-     
-     public void init()
-     {
+
+    private Student student;
+
+    public void init() {
         // employee=employeeService.findById(getActiveUser().getId());
-         student=studentService.listAll().get(studentService.listAll().size()-1);
-         
-         
-     }
-     
-     public void updateStudentProfile(Student stu)
-     {
-         if(stu.getId()!=null)
-         {
-             studentService.update(stu);
-         }
-         if(stu.getPersonType().equals(PersonType.LEARNER))
-         {
-                redirecting("studentDash");
-         }
-       
-     }
-     
-     public void cancel(Student stu)
-     {
-        if(stu.getPersonType().equals(PersonType.LEARNER))
-         {
-                redirecting("studentDash");
-         }
-     }
-     public Student getStudent()
-     {
-         return student;
-     }
-     public void setStudent(Student student)
-     {
-         this.student=student;
-     }
-    
-    
-    
+        student = studentService.listAll().get(studentService.listAll().size() - 1);
+
+    }
+
+    public void updateStudentProfile(Student stu) {
+        if (stu.getId() != null) {
+            studentService.update(stu);
+        }
+        if (stu.getPersonType().equals(PersonType.LEARNER)) {
+            redirecting("studentDash");
+        }
+
+    }
+
+    public void cancel(Student stu) {
+        if (stu.getPersonType().equals(PersonType.LEARNER)) {
+            redirecting("studentDash");
+        }
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
 }

@@ -12,20 +12,24 @@ import za.gov.sars.domain.Grade;
  *
  * @author S2028389
  */
-public interface GradeServiceLocal 
-{
+public interface GradeServiceLocal {
+
     Grade save(Grade grade);
+
     Grade findById(Long id);
+
     Grade update(Grade grade);
+
     void deleteAll();
+
     Grade deleteById(Long id);
-    
+
     List<Grade> findGradeByGradeNum(String gradeNum);
-    
+
     List<Grade> listAll();
-    
+
     boolean isExist(Grade grade);
+
     long count();
-     
-    
+
 }

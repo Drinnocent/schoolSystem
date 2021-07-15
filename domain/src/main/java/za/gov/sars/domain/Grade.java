@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -32,16 +33,10 @@ public class Grade extends BaseEntity {
     private String designation;
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Student> students = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    List<Subject> subject = new ArrayList<>();
-    //@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    //private Facility facility;
-    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy="grades",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Employee> employees = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private School school;
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<Assessment> assessments = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -67,28 +62,12 @@ public class Grade extends BaseEntity {
         this.students = students;
     }
 
-    public List<Subject> getSubject() {
-        return subject;
-    }
-
-    public void setSubject(List<Subject> subject) {
-        this.subject = subject;
-    }
-
     public School getSchool() {
         return school;
     }
 
     public void setSchool(School school) {
         this.school = school;
-    }
-
-    public List<Assessment> getAssessments() {
-        return assessments;
-    }
-
-    public void setAssessments(List<Assessment> assessments) {
-        this.assessments = assessments;
     }
 
     public List<Employee> getEmployees() {

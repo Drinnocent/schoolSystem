@@ -33,7 +33,7 @@ import za.gov.sars.service.SubjectServiceLocal;
 @ManagedBean
 @ViewScoped
 public class SchoolBean extends BaseBean {
-    
+
     @Autowired
     private SchoolServiceLocal schoolService;
     @Autowired
@@ -46,79 +46,69 @@ public class SchoolBean extends BaseBean {
     private GradeServiceLocal gradeService;
     @Autowired
     private SubjectServiceLocal subjectService;
-    
-    
-    private List<School> schools=new ArrayList<>();
-    private List<Student> students=new ArrayList<>();
-    private List<Employee> employees=new ArrayList<>();
-    private List<Facility> facilities=new ArrayList<>();
-    private List<Grade> grades=new ArrayList<>();
-    private List<Subject> subjects=new ArrayList<>();
-    
+
+    private List<School> schools = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
+    private List<Facility> facilities = new ArrayList<>();
+    private List<Grade> grades = new ArrayList<>();
+    private List<Subject> subjects = new ArrayList<>();
+
     private School school;
-    
-    
+
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         this.resetView(false).setList(true);
-        
-        schools=schoolService.listAll();
-        students=studentService.listAll();
-        employees=employeeService.listAll();
-        facilities=facilityService.listAll();
-        grades=gradeService.listAll();
-        subjects=subjectService.listAll();
+
+        schools = schoolService.listAll();
+        students = studentService.listAll();
+        employees = employeeService.listAll();
+        facilities = facilityService.listAll();
+        grades = gradeService.listAll();
+        subjects = subjectService.listAll();
     }
-    
-    
-    
-    public void addOrUpdate(School sc){
+
+    public void addOrUpdate(School sc) {
         this.resetView(false).setAdd(true);
-        if(sc != null){
-           // sc.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
-           sc.setUpdatedDate(new Date());
-          school = sc;
-        }
-        else{
+        if (sc != null) {
+            // sc.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            sc.setUpdatedDate(new Date());
+            school = sc;
+        } else {
             school = new School();
-          //  school.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            //  school.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             school.setCreatedDate(new Date());
-            
-          
-            
-            
+
             schools.add(0, school);
         }
     }
-    
-    public void save(School sc){
-        if(sc.getId() != null){
+
+    public void save(School sc) {
+        if (sc.getId() != null) {
             schoolService.update(sc);
-        }
-        else{
+        } else {
             schoolService.save(sc);
         }
         this.resetView(false).setList(true);
     }
-    
-    public void delete(School sc){
+
+    public void delete(School sc) {
         schoolService.deleteById(sc.getId());
         synchronize(sc);
         this.resetView(false).setList(true);
     }
-    
-    public void synchronize(School sc){
+
+    public void synchronize(School sc) {
         Iterator<School> schoolList = schools.iterator();
-        while(schoolList.hasNext()){
-            if(schoolList.next().getId().equals(sc.getId())){
+        while (schoolList.hasNext()) {
+            if (schoolList.next().getId().equals(sc.getId())) {
                 schoolList.remove();
             }
         }
     }
-    
-    public void cancel(School sc){
-        if(schools.contains(sc)){
+
+    public void cancel(School sc) {
+        if (schools.contains(sc)) {
             schools.remove(sc);
         }
         this.resetView(false).setList(true);
@@ -179,7 +169,5 @@ public class SchoolBean extends BaseBean {
     public void setSchool(School school) {
         this.school = school;
     }
-    
-    
-    
+
 }

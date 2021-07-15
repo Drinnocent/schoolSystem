@@ -36,12 +36,15 @@ public class Student extends Person {
         @JoinColumn(name = "student_id")}, inverseJoinColumns = {
         @JoinColumn(name = "subject_id")})
     private List<Subject> subjects = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Assessment> assessments = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Attendance> attendances = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    private Grade grade;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private School school;
+
     public String getStudentNumber() {
         return studentNumber;
     }
@@ -81,5 +84,14 @@ public class Student extends Person {
     public void setSchool(School school) {
         this.school = school;
     }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+    
 
 }

@@ -31,7 +31,8 @@ import za.gov.sars.service.SubjectServiceLocal;
  */
 @ManagedBean
 @ViewScoped
-public class SubjectBean extends BaseBean{
+public class SubjectBean extends BaseBean {
+
     @Autowired
     private SubjectServiceLocal subjectService;
     @Autowired
@@ -42,78 +43,72 @@ public class SubjectBean extends BaseBean{
     private GradeServiceLocal gradeService;
     @Autowired
     private EmployeeServiceLocal employeeService;
-    
-   private  List<Subject> subjects=new ArrayList<>();
-    private List<Assessment> assessments=new ArrayList<>();
-   private  List<Student> students=new ArrayList<>();
-    private List <Grade> grades=new ArrayList<>();
-    private List<Employee> employee=new ArrayList<>();
-    
+
+    private List<Subject> subjects = new ArrayList<>();
+    private List<Assessment> assessments = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
+    private List<Grade> grades = new ArrayList<>();
+    private List<Employee> employee = new ArrayList<>();
+
     private Subject subject;
-    
-    
-    
+
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         this.resetView(false).setList(true);
-        
-        subjects=subjectService.listAll();
-        assessments=assessmentService.listAll();
-        students=studentService.listAll();
-        grades=gradeService.listAll();
-        employee=employeeService.listAll();
-          
+
+        subjects = subjectService.listAll();
+        assessments = assessmentService.listAll();
+        students = studentService.listAll();
+        grades = gradeService.listAll();
+        employee = employeeService.listAll();
+
     }
-    
-    
-    public void addOrUpdate(Subject sub){
+
+    public void addOrUpdate(Subject sub) {
         this.resetView(false).setAdd(true);
-        if(sub != null){
-          // sub.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+        if (sub != null) {
+            // sub.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             sub.setUpdatedDate(new Date());
-            subject= sub;
-        }
-        else{
+            subject = sub;
+        } else {
             subject = new Subject();
-          //  subject.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            //  subject.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             subject.setCreatedDate(new Date());
-                 
+
             subjects.add(0, subject);
         }
     }
-    
-    public void save(Subject sub){
-        if(sub.getId() != null){
+
+    public void save(Subject sub) {
+        if (sub.getId() != null) {
             subjectService.update(sub);
-        }
-        else{
+        } else {
             subjectService.save(sub);
         }
         this.resetView(false).setList(true);
     }
-   
-    public void delete(Subject sub){
+
+    public void delete(Subject sub) {
         subjectService.deleteById(sub.getId());
         synchronize(sub);
         this.resetView(false).setList(true);
     }
-    
-    public void synchronize(Subject sub){
+
+    public void synchronize(Subject sub) {
         Iterator<Subject> subjectList = subjects.iterator();
-        while(subjectList.hasNext()){
-            if(subjectList.next().getId().equals(sub.getId())){
+        while (subjectList.hasNext()) {
+            if (subjectList.next().getId().equals(sub.getId())) {
                 subjectList.remove();
             }
         }
     }
-    
-    public void cancel(Subject sub){
-        if(sub.getId()==null){
-        if(subjects.contains(sub)){
-            subjects.remove(sub);
-        }
-        this.resetView(false).setList(true);
+
+    public void cancel(Subject sub) {
+        if (sub.getId() == null) {
+            if (subjects.contains(sub)) {
+                subjects.remove(sub);
+            }
+            this.resetView(false).setList(true);
         }
     }
 
@@ -164,9 +159,5 @@ public class SubjectBean extends BaseBean{
     public void setEmployee(List<Employee> employee) {
         this.employee = employee;
     }
-  
-    
-    
-  
-    
+
 }

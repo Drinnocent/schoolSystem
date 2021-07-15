@@ -15,15 +15,13 @@ import za.gov.sars.persistence.SchoolRepository;
  * @author S2028389
  */
 public class SchoolService implements SchoolServiceLocal {
-    
-    
+
     @Autowired
     private SchoolRepository schoolRepository;
-    
-    
+
     @Override
     public School save(School student) {
-       return schoolRepository.save(student);
+        return schoolRepository.save(student);
     }
 
     @Override
@@ -42,13 +40,13 @@ public class SchoolService implements SchoolServiceLocal {
     @Override
     public void deleteAll() {
         schoolRepository.deleteAll();
-       
+
     }
 
     @Override
     public School deleteById(Long id) {
         School stu = findById(id);
-        if(stu != null){
+        if (stu != null) {
             schoolRepository.deleteById(id);
         }
         return stu;
@@ -56,22 +54,22 @@ public class SchoolService implements SchoolServiceLocal {
 
     @Override
     public List<School> findSchoolBySchoolNum(String schoolNum) {
-         return schoolRepository.findAll();
+        return schoolRepository.findAll();
     }
 
     @Override
     public List<School> listAll() {
-         return schoolRepository.findAll();
+        return schoolRepository.findAll();
     }
 
     @Override
     public boolean isExist(School school) {
-       return schoolRepository.findById(school.getId()) != null;
+        return schoolRepository.findById(school.getId()) != null;
     }
 
     @Override
     public long count() {
         return schoolRepository.count();
     }
-    
+
 }

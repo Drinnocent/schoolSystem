@@ -30,11 +30,11 @@ public class Subject extends BaseEntity {
     private String name;
     @Column(name = "subject_Code")
     private String Code;
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "subjects",cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Employee> employees = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Assessment> assessments = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private School school;
 
     public String getName() {
@@ -76,6 +76,5 @@ public class Subject extends BaseEntity {
     public void setSchool(School school) {
         this.school = school;
     }
-    
 
 }

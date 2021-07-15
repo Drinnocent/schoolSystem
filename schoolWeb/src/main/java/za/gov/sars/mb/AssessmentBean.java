@@ -28,7 +28,8 @@ import za.gov.sars.service.SubjectServiceLocal;
  */
 @ManagedBean
 @ViewScoped
-public class AssessmentBean extends BaseBean{
+public class AssessmentBean extends BaseBean {
+
     @Autowired
     private AssessmentServiceLocal assessmentService;
     @Autowired
@@ -37,74 +38,63 @@ public class AssessmentBean extends BaseBean{
     private StudentServiceLocal studentService;
     @Autowired
     private GradeServiceLocal gradeService;
-    
-    private List<Assessment> assessments=new ArrayList<>();
-    private List<Student> students=new ArrayList<>();
-    private List<Subject> subjects=new ArrayList<>();
-    
-    
-    
+
+    private List<Assessment> assessments = new ArrayList<>();
+    private List<Student> students = new ArrayList<>();
+    private List<Subject> subjects = new ArrayList<>();
+
     private Assessment assessment;
-    
+
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         this.resetView(false).setList(true);
-        assessments=assessmentService.listAll();
-        students=studentService.listAll();
-        subjects=subjectService.listAll();
-       
-        
-        
+        assessments = assessmentService.listAll();
+        students = studentService.listAll();
+        subjects = subjectService.listAll();
+
     }
-    
-    
-    
-    public void addOrUpdate(Assessment ass){
+
+    public void addOrUpdate(Assessment ass) {
         this.resetView(false).setAdd(true);
-        if(ass != null){
-          // ass.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+        if (ass != null) {
+            // ass.setUpdateBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             ass.setUpdatedDate(new Date());
-          assessment = ass;
-        }
-        else{
+            assessment = ass;
+        } else {
             assessment = new Assessment();
-         //  assessment.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
+            //  assessment.setCreatedBy(getActiveUser().getFirstName() + " " + getActiveUser().getLastName());
             assessment.setCreatedDate(new Date());
-            
-            
-            
+
             assessments.add(0, assessment);
         }
     }
-    
-    public void save(Assessment emp){
-        if(emp.getId() != null){
+
+    public void save(Assessment emp) {
+        if (emp.getId() != null) {
             assessmentService.update(emp);
-        }
-        else{
+        } else {
             assessmentService.save(emp);
         }
         this.resetView(false).setList(true);
     }
-    
-    public void delete(Assessment ass){
+
+    public void delete(Assessment ass) {
         assessmentService.deleteById(ass.getId());
         synchronize(ass);
         this.resetView(false).setList(true);
     }
-    
-    public void synchronize(Assessment ass){
+
+    public void synchronize(Assessment ass) {
         Iterator<Assessment> assessmentList = assessments.iterator();
-        while(assessmentList.hasNext()){
-            if(assessmentList.next().getId().equals(ass.getId())){
+        while (assessmentList.hasNext()) {
+            if (assessmentList.next().getId().equals(ass.getId())) {
                 assessmentList.remove();
             }
         }
     }
-    
-    public void cancel(Assessment ass){
-        if(assessments.contains(ass)){
+
+    public void cancel(Assessment ass) {
+        if (assessments.contains(ass)) {
             assessments.remove(ass);
         }
         this.resetView(false).setList(true);
@@ -141,8 +131,5 @@ public class AssessmentBean extends BaseBean{
     public void setAssessment(Assessment assessment) {
         this.assessment = assessment;
     }
-    
-    
-    
-    
+
 }
