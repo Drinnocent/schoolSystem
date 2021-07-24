@@ -5,6 +5,7 @@
  */
 package za.gov.sars.mb;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -14,6 +15,34 @@ import org.springframework.web.context.annotation.RequestScope;
  */
 @ManagedBean
 @RequestScope
-public class MenuBean extends BaseBean{
-    
+public class MenuBean extends BaseBean {
+
+    @PostConstruct
+    public void init() {
+        String page = "";
+    }
+
+    public String route(String page) {
+        return defaultRouter(page);
+    }
+
+    public String routing(String page) {
+        return defaultRouter(page);
+    }
+
+    public String routeToAdmin(String page) {
+        getActiveUser().setModuleWelcomeMessage("Welcome to Admin");
+        return defaultRouter(page);
+    }
+
+    public String routeToEmployee(String page) {
+        getActiveUser().setModuleWelcomeMessage("Welcome to Employee");
+        return defaultRouter(page);
+    }
+
+    public String routeToLearner(String page) {
+        getActiveUser().setModuleWelcomeMessage("Welcome to Learner");
+        return defaultRouter(page);
+    }
+
 }

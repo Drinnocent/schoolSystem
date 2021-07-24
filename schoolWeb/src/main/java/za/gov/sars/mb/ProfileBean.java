@@ -11,7 +11,7 @@ import javax.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import za.gov.sars.domain.Employee;
 import za.gov.sars.service.EmployeeService;
-import za.gov.sars.service.LoginService;
+import za.gov.sars.service.SystemUserService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class ProfileBean  extends BaseBean{
     @Autowired
     private EmployeeService employeeService;
     @Autowired
-    private LoginService loginService;
+    private SystemUserService loginService;
     
     private Employee employee;
     

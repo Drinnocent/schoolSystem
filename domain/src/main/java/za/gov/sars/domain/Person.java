@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import za.gov.sars.common.Gender;
 import za.gov.sars.common.PersonType;
 
 /**
@@ -41,6 +42,17 @@ public class Person extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "person_type")
     private PersonType personType;
+     @Column(name = "genderType")
+    private Gender genderType;
+
+    public Gender getGenderType() {
+        return genderType;
+    }
+
+    public void setGenderType(Gender genderType) {
+        this.genderType = genderType;
+    }
+     
 
     public PersonType getPersonType() {
         return personType;

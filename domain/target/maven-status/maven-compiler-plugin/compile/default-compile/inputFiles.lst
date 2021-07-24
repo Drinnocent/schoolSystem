@@ -5,7 +5,7 @@ D:\Work\Java\2021\SchoolManagementSytem\domain\src\main\java\za\gov\sars\domain\
 D:\Work\Java\2021\SchoolManagementSytem\domain\src\main\java\za\gov\sars\domain\School.java
 D:\Work\Java\2021\SchoolManagementSytem\domain\src\main\java\za\gov\sars\domain\Employee.java
 D:\Work\Java\2021\SchoolManagementSytem\domain\src\main\java\za\gov\sars\domain\BaseEntity.java
-D:\Work\Java\2021\SchoolManagementSytem\domain\src\main\java\za\gov\sars\domain\SystemUser.java
+D:\Work\Java\2021\SchoolManagementSytem\domain\src\main\java\za\gov\sars\domain\SchoolSystemUser.java
 D:\Work\Java\2021\SchoolManagementSytem\domain\src\main\java\za\gov\sars\domain\Student.java
 D:\Work\Java\2021\SchoolManagementSytem\domain\src\main\java\za\gov\sars\domain\Attendance.java
 D:\Work\Java\2021\SchoolManagementSytem\domain\src\main\java\za\gov\sars\domain\Facility.java

@@ -23,6 +23,10 @@ import org.hibernate.envers.Audited;
 @Table(name = "assessment")
 public class Assessment extends BaseEntity {
 
+    @Column(name = "name")
+    private String name;
+     @Column(name = "description")
+    private String description;
     @Column(name = "assess_status")
     private String status;
     @Column(name = "student_Mark")
@@ -38,15 +42,35 @@ public class Assessment extends BaseEntity {
     @Column(name = "submission_Date")
     private Date submissionDate;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Subject subject;
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Student student;
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Grade grade;
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Facility facility;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Employee educator;
+    
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    
     public String getStatus() {
         return status;
     }
@@ -133,6 +157,15 @@ public class Assessment extends BaseEntity {
     public void setFacility(Facility facility) {
         this.facility = facility;
     }
+
+    public Employee getEducator() {
+        return educator;
+    }
+
+    public void setEducator(Employee educator) {
+        this.educator = educator;
+    }
+    
     
     
 

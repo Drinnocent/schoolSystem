@@ -53,9 +53,8 @@ public class EmployeeService implements EmployeeServiceLocal {
     }
 
     @Override
-    public List<Employee> findEmployeeByEmployeeNum(String employeeNum) {
-        //Advanced code to be demonstrated later
-        return employeeRepository.findAll();
+    public Employee findEmployeeByEmployeeNum(String identifier) {
+       return employeeRepository.findEmployeeByEmployeeNum(identifier);
     }
 
     @Override

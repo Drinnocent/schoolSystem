@@ -30,7 +30,7 @@ public class Subject extends BaseEntity {
     private String name;
     @Column(name = "subject_Code")
     private String Code;
-    @OneToMany(mappedBy = "subjects",cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Employee> employees = new ArrayList<>();
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Assessment> assessments = new ArrayList<>();

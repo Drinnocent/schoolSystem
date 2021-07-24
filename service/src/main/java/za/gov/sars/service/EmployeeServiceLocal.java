@@ -24,7 +24,7 @@ public interface EmployeeServiceLocal {
 
     Employee deleteById(Long id);
 
-    List<Employee> findEmployeeByEmployeeNum(String employeeNum);
+    Employee findEmployeeByEmployeeNum(String employeeNum);
 
     List<Employee> listAll();
 

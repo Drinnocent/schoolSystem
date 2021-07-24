@@ -24,7 +24,7 @@ public interface StudentServiceLocal {
 
     Student deleteById(Long id);
 
-    List<Student> findStudentByStudentNum(String studentNum);
+    Student findStudentByStudentNum(String studentNum);
 
     List<Student> listAll();
 

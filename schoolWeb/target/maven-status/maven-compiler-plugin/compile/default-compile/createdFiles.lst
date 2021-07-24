@@ -15,5 +15,6 @@ za\gov\sars\mb\StudentBean.class
 za\gov\sars\mb\SchoolBean.class
 za\gov\sars\config\CustomerServletContextListener.class
 za\gov\sars\mb\AttendanceBean.class
+za\gov\sars\mb\SystemUserBean.class
 za\gov\sars\config\EntityConverter.class
 za\gov\sars\config\WebAppInitializer.class

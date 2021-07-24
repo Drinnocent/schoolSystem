@@ -55,8 +55,8 @@ public class StudentService implements StudentServiceLocal {
     }
 
     @Override
-    public List<Student> findStudentByStudentNum(String studentNum) {
-        return studentRepository.findAll();
+    public Student findStudentByStudentNum(String identifier) {
+         return studentRepository.findStudentByStudentNum(identifier);
     }
 
     @Override

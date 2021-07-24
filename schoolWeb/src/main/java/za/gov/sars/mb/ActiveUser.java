@@ -7,16 +7,17 @@ package za.gov.sars.mb;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import org.springframework.web.context.annotation.SessionScope;
+import javax.faces.bean.SessionScoped;
 import za.gov.sars.common.PersonType;
+import za.gov.sars.common.SystemUserType;
 
 /**
  *
  * @author S2028389
  */
 //will manage who is the active user
-@ManagedBean(eager=true) //used through the system and eager true because it will used throughout /jsf manages bean
-@SessionScope  //manages how user have been online
+@ManagedBean //used through the system and eager true because it will used throughout /jsf manages bean
+@SessionScoped  //manages how user have been online
 public class ActiveUser implements Serializable{
     
     private String username;
@@ -25,6 +26,8 @@ public class ActiveUser implements Serializable{
     private boolean userLoginIndicator = false;
     private String userRole;
     private boolean templateUploadIndicator;
+    private String identifier;
+    private String moduleWelcomeMessage;
     private String adminRole;
     private String userSessionId;
     private String firstName;
@@ -37,7 +40,9 @@ public class ActiveUser implements Serializable{
     private boolean clerk;
     private boolean headOfDepartment;
     private boolean generalWorker;
+    private boolean systemadmin;
     private PersonType personType;
+    private SystemUserType systemUserType;
     
     public void resetRole(boolean validity){
         setAdmin(validity);
@@ -47,6 +52,8 @@ public class ActiveUser implements Serializable{
         setHeadOfDepartment(validity);
         setLearner(validity);
         setPrincipal(validity);
+        setSystemadmin(validity);
+        
     }
       
 
@@ -201,5 +208,40 @@ public class ActiveUser implements Serializable{
     public void setGeneralWorker(boolean generalWorker) {
         this.generalWorker = generalWorker;
     }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public boolean isSystemadmin() {
+        return systemadmin;
+    }
+
+    public void setSystemadmin(boolean systemadmin) {
+        this.systemadmin = systemadmin;
+    }
+
+    public SystemUserType getSystemUserType() {
+        return systemUserType;
+    }
+
+    public void setSystemUserType(SystemUserType systemUserType) {
+        this.systemUserType = systemUserType;
+    }
+
+    public String getModuleWelcomeMessage() {
+        return moduleWelcomeMessage;
+    }
+
+    public void setModuleWelcomeMessage(String moduleWelcomeMessage) {
+        this.moduleWelcomeMessage = moduleWelcomeMessage;
+    }
+    
+    
+    
     
 }

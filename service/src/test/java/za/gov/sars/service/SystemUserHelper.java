@@ -11,9 +11,9 @@ import za.gov.sars.common.PersonType;
 import za.gov.sars.common.SystemUserStatus;
 import za.gov.sars.common.SystemUserType;
 import za.gov.sars.domain.Employee;
-import za.gov.sars.domain.SystemUser;
+import za.gov.sars.domain.SchoolSystemUser;
 import za.gov.sars.persistence.EmployeeRepository;
-import za.gov.sars.persistence.LoginRepository;
+import za.gov.sars.persistence.SystemUserRepository;
 
 /**
  *
@@ -21,11 +21,11 @@ import za.gov.sars.persistence.LoginRepository;
  */
 public class SystemUserHelper {
 
-    public static void addSystemUser(LoginRepository loginRepository, EmployeeRepository employeeRepository) {
+    public static void addSystemUser(SystemUserRepository systemUserRepository, EmployeeRepository employeeRepository) {
         int adminCount = 0;
         for (Employee employee : employeeRepository.findAll()) {
             if (employee.getPersonType().equals(PersonType.SYSTEM_USER) && employee.getPersonType().equals(EmployeeType.ADMIN)) {
-                SystemUser systemUser = new SystemUser();
+                SchoolSystemUser systemUser = new SchoolSystemUser();
 
                 systemUser.setCreatedBy("Test");
                 systemUser.setCreatedDate(new Date());
@@ -35,10 +35,12 @@ public class SystemUserHelper {
                 systemUser.setPersonType(employee.getPersonType());
                 systemUser.setSystemUserType(systemUser.getSystemUserType());
                 systemUser.setSystemUserStatus(SystemUserStatus.ACTIVE);
+                systemUser.setIdentifier(employee.getEmployeeId());
+                systemUser.setGenderType(systemUser.getGenderType());
                 systemUser.setUsername("admin" + adminCount);
                 systemUser.setPassword("admin" + adminCount);
                 systemUser.setChangePassword(false);
-                loginRepository.save(systemUser);
+                systemUserRepository.save(systemUser);
                 adminCount++;
 
             }
@@ -49,7 +51,7 @@ public class SystemUserHelper {
 
         for (Employee employee : employeeRepository.findAll()) {
             if (employee.getPersonType().equals(PersonType.EMPLOYEE) || employee.getPersonType().equals(EmployeeType.ADMIN) || employee.getPersonType().equals(EmployeeType.EDUCATOR) || employee.getPersonType().equals(EmployeeType.HOD) || employee.getPersonType().equals(EmployeeType.PRINCIPAL)) {
-                SystemUser systemUser = new SystemUser();
+                SchoolSystemUser systemUser = new SchoolSystemUser();
 
                 systemUser.setCreatedBy("Test");
                 systemUser.setCreatedDate(new Date());
@@ -59,11 +61,13 @@ public class SystemUserHelper {
                 systemUser.setPersonType(employee.getPersonType());
                 systemUser.setSystemUserType(systemUser.getSystemUserType());
                 systemUser.setSystemUserStatus(SystemUserStatus.ACTIVE);
+                systemUser.setIdentifier(employee.getEmployeeId());
+                systemUser.setGenderType(systemUser.getGenderType());
                 systemUser.setUsername("user" + empCount);
                 systemUser.setPassword("password" + empCount);
                 systemUser.setConfirmPassword("password" + empCount);
                 systemUser.setChangePassword(false);
-                loginRepository.save(systemUser);
+                systemUserRepository.save(systemUser);
                 empCount++;
 
             }

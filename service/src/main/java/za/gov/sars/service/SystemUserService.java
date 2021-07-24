@@ -8,24 +8,28 @@ package za.gov.sars.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.gov.sars.domain.SystemUser;
-import za.gov.sars.persistence.LoginRepository;
+import za.gov.sars.domain.SchoolSystemUser;
+import za.gov.sars.persistence.SystemUserRepository;
 
 /**
  *
  * @author S2028389
  */
 @Service
-public class LoginService implements LoginServiceLocal {
+public class SystemUserService implements SystemUserServiceLocal {
 
     @Autowired
-    private LoginRepository loginRepository;
+    private SystemUserRepository loginRepository;
+
+    public SchoolSystemUser save(SchoolSystemUser user) {
+        return loginRepository.save(user);
+    }
 
     @Override
-    public SystemUser logUserIn(String username, String password) {
-        SystemUser systemUser = null;
+    public SchoolSystemUser logUserIn(String username, String password) {
+        SchoolSystemUser systemUser = null;
         if (isUserExisting(username)) {
-            for (SystemUser user : loginRepository.findAll()) {
+            for (SchoolSystemUser user : loginRepository.findAll()) {
                 if (user.getUsername().equalsIgnoreCase(username) && user.getPassword().equals(password)) {
                     systemUser = user;
                 }
@@ -37,7 +41,7 @@ public class LoginService implements LoginServiceLocal {
     @Override
     public boolean isUserExisting(String username) {
         int count = 0;
-        for (SystemUser user : loginRepository.findAll()) {
+        for (SchoolSystemUser user : loginRepository.findAll()) {
             if (user.getUsername().equals(username)) {
                 count++;
             }
@@ -50,12 +54,12 @@ public class LoginService implements LoginServiceLocal {
     }
 
     @Override
-    public SystemUser findById(Long Id) {
+    public SchoolSystemUser findById(Long Id) {
         return loginRepository.getOne(Id);
     }
 
     @Override
-    public SystemUser update(SystemUser systemUser) {
+    public SchoolSystemUser update(SchoolSystemUser systemUser) {
         return loginRepository.save(systemUser);
     }
 
@@ -70,7 +74,7 @@ public class LoginService implements LoginServiceLocal {
     }
 
     @Override
-    public List<SystemUser> listAll() {
+    public List<SchoolSystemUser> listAll() {
         return loginRepository.findAll();
     }
 

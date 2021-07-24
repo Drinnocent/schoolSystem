@@ -18,10 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import za.gov.sars.common.TestDataSourceConfiguration;
+import za.gov.sars.persistence.AssessmentRepository;
+import za.gov.sars.persistence.AttendanceRepository;
 import za.gov.sars.persistence.EmployeeRepository;
 import za.gov.sars.persistence.FacilityRepository;
 import za.gov.sars.persistence.GradeRepository;
-import za.gov.sars.persistence.LoginRepository;
+import za.gov.sars.persistence.SchoolRepository;
+import za.gov.sars.persistence.SystemUserRepository;
 import za.gov.sars.persistence.StudentRepository;
 import za.gov.sars.persistence.SubjectRepository;
 
@@ -45,7 +48,13 @@ public class ServiceLayerTestCase {
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
-    private LoginRepository loginRepository;
+    private SystemUserRepository loginRepository;
+    @Autowired
+    private SchoolRepository schoolRepository;
+    @Autowired
+    private AttendanceRepository attendanceRepository;
+    @Autowired
+    private AssessmentRepository assessmentRepository;
 
     public ServiceLayerTestCase() {
     }
@@ -74,40 +83,58 @@ public class ServiceLayerTestCase {
     // public void hello() {}
     @Test
     public void TestA() {
-        FacilityHelper.addFacility(facilityRepository);
+        SchoolHelper.addSchool(schoolRepository, employeeRepository, studentRepository);
+
     }
 
     @Test
     public void TestB() {
+        FacilityHelper.addFacility(facilityRepository);
+    }
+
+    @Test
+    public void TestC() {
         GradeHelper.addGrade(gradeRepository);
 
     }
 
     @Test
-    public void TestC() {
+    public void TestD() {
         SubjectHelper.addSubject(subjectRepository);
 
     }
 
     @Test
     public void TestE() {
-        EmployeeHelper.addEmployee(employeeRepository, subjectRepository, gradeRepository);
+        StudentHelper.addStudent(studentRepository);
+
     }
 
     @Test
     public void TestF() {
-        SystemAdminHelper.addAdmin(employeeRepository);
+        EmployeeHelper.addEmployee(employeeRepository, subjectRepository, gradeRepository, schoolRepository);
 
     }
 
     @Test
     public void TestG() {
-        SystemUserHelper.addSystemUser(loginRepository, employeeRepository);
+        SystemAdminHelper.addAdmin(employeeRepository);
+
     }
 
     @Test
     public void TestH() {
-        StudentHelper.addStudent(studentRepository);
+        SystemUserHelper.addSystemUser(loginRepository, employeeRepository);
 
+    }
+
+    @Test
+    public void TestI() {
+        AssessmentHelper.addAssessment(assessmentRepository, employeeRepository, studentRepository, facilityRepository);
+    }
+
+    @Test
+    public void TestJ() {
+        AttendanceHelper.addAttendance(attendanceRepository, employeeRepository, studentRepository);
     }
 }

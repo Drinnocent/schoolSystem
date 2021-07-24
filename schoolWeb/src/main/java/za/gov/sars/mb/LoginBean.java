@@ -8,8 +8,8 @@ package za.gov.sars.mb;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,11 @@ import za.gov.sars.common.EmployeeType;
 import za.gov.sars.common.PersonType;
 import za.gov.sars.common.SystemUserStatus;
 import za.gov.sars.common.SystemUserType;
-import za.gov.sars.domain.SystemUser;
-import za.gov.sars.service.LoginServiceLocal;
+import za.gov.sars.domain.Employee;
+import za.gov.sars.domain.SchoolSystemUser;
+import za.gov.sars.service.EmployeeServiceLocal;
+import za.gov.sars.service.StudentServiceLocal;
+import za.gov.sars.service.SystemUserServiceLocal;
 
 /**
  *
@@ -30,7 +33,11 @@ import za.gov.sars.service.LoginServiceLocal;
 public class LoginBean extends BaseBean {
 
     @Autowired
-    private LoginServiceLocal loginService;
+    private SystemUserServiceLocal loginService;
+    @Autowired
+    private EmployeeServiceLocal employeeService;
+    @Autowired
+    private StudentServiceLocal studentService;
 
     private String username;
     private String password;
@@ -45,8 +52,10 @@ public class LoginBean extends BaseBean {
 
     private static final String LOGIN_PAGE = "/login.xhml";
 
-    private SystemUser systemUser;
+    private SchoolSystemUser systemUser;
+    private ActiveUser activeUser;
 
+    @PostConstruct
     public void init() {
         setLoginPanel(true);
         setChangePasswordPanel(false);
@@ -55,23 +64,19 @@ public class LoginBean extends BaseBean {
     }
 
     public String doLogin(String username, String password) {
-        /* if(isValidUser(username,password)){
-         //getActiveUser().setUserLoginIndicator(Boolean.TRUE);
-         systemUser = loginService.logUserIn(username, password);
-         if(systemUser.getPersonType().equals(PersonType.SYSTEM_USER))
-         {
-         return "/adminConsole.xhtml?faces-redirect=true";
-         }
-         else if(systemUser.getPersonType().equals(PersonType.LEARNER))
-         {
-         return "/learnerConsole.xhtml?faces-redirect=true";
-         }
-         else
-         {
-         return "/employeeConsole.xhtml?faces-redirect=true";
-         }
-            
-         }*/
+        if (isValidUser(username, password)) {
+            getActiveUser().setUserLoginIndicator(Boolean.TRUE);
+            systemUser = loginService.logUserIn(username, password);
+            if (systemUser.getSystemUserType().equals(SystemUserType.SYSTEM_ADMIN)) {
+                //getActiveUser().
+                return "/adminConsole.xhtml?faces-redirect=true";
+            } else if (systemUser.getSystemUserType().equals(SystemUserType.LEARNER)) {
+                return "/learnerConsole.xhtml?faces-redirect=true";
+            } else if (systemUser.getSystemUserType().equals(SystemUserType.EMPLOYEE)) {
+                return "/employeeConsole.xhtml?faces-redirect=true";
+            }
+
+        }
 
         return "/adminConsole.xhtml?faces-redirect=true";
     }
@@ -81,16 +86,21 @@ public class LoginBean extends BaseBean {
     }
 
     public boolean isValidUser(String username, String password) {
-        SystemUser user = loginService.logUserIn(username, password);
+        SchoolSystemUser user = loginService.logUserIn(username, password);
 
         if (user == null) {
             return false;
         }
+        Employee emp = employeeService.findEmployeeByEmployeeNum(user.getIdentifier());
 
-        if (user.getSystemUserType().equals(EmployeeType.GENERAL_WORKER)) {
-            return false;
-        } else if (user.getSystemUserType().equals(EmployeeType.CLERK)) {
-            return false;
+        if (user.getPersonType().equals(PersonType.SYSTEM_USER)) {
+            if (user.getSystemUserType().equals(SystemUserType.EMPLOYEE)) {
+                if (user.getPersonType().equals(EmployeeType.GENERAL_WORKER)) {
+                    return false;
+                } else if (user.getSystemUserType().equals(EmployeeType.CLERK)) {
+                    return false;
+                }
+            }
         }
 
         if (user.getSystemUserStatus().equals(SystemUserStatus.INACTIVE)) {
@@ -114,8 +124,8 @@ public class LoginBean extends BaseBean {
         }
 
         if (password.equals(user.getPassword()) && username.equals(user.getUsername())) {
-            //getActiveUser().setUsername(user.getUsername());
-            //().setPersonType(user.getPersonType());
+            getActiveUser().setUsername(user.getUsername());
+            getActiveUser().setPersonType(user.getPersonType());
 
             StringBuilder userDisplayName = new StringBuilder("[");
             userDisplayName.append(" ");
@@ -125,33 +135,34 @@ public class LoginBean extends BaseBean {
             userDisplayName.append(" ");
             userDisplayName.append("]");
 
-            /*
-            
-             // getActiveUser().setDisplayName(userDisplayName);
-            
-             // getActiveUser().setFirstName(user.getFirstName());
-             getActiveUser().setLastName(user.getLastName());
-             getActiveUser().setUserRole(user.getSystemUserType().toString());
-             getActiveUser().setActiveStatus(user.getSystemUserStatus().toString());
-             getActiveUser().setUserLoginIndicator(Boolean.TRUE);
-            
-             getActiveUser().resetRole(false);
-             if(user.getSystemUserType().equals(SystemUserType.ADMIN)){
-             getActiveUser().setAdmin(true);
-             }
-             else if(user.getSystemUserType().equals(SystemUserType.EDUCATOR)){
-             getActiveUser().setEducator(true);
-             }
-             else if(user.getSystemUserType().equals(SystemUserType.HOD)){
-             getActiveUser().setHeadOfDepartment(true);
-             }
-             else if(user.getSystemUserType().equals(SystemUserType.PRINCIPAL)){
-             getActiveUser().setPrincipal(true);
-             }
-             else if(user.getSystemUserType().equals(SystemUserType.LEARNER)){
-             getActiveUser().setLearner(true);
-             }
-             return true;**/
+            getActiveUser().setDisplayName(userDisplayName);
+
+            getActiveUser().setFirstName(user.getFirstName());
+            getActiveUser().setLastName(user.getLastName());
+            getActiveUser().setUserRole(user.getSystemUserType().toString());
+            getActiveUser().setActiveStatus(user.getSystemUserStatus().toString());
+            getActiveUser().setUserLoginIndicator(Boolean.TRUE);
+            getActiveUser().setDisplayName(userDisplayName);
+
+            getActiveUser().resetRole(false);
+            if (user.getPersonType().equals(PersonType.SYSTEM_USER)) {
+                if (user.getSystemUserType().equals(SystemUserType.EMPLOYEE)) {
+                    if (emp.getEmployeeType().equals(EmployeeType.ADMIN)) {
+                        getActiveUser().setAdmin(true);
+                    } else if (emp.getEmployeeType().equals(EmployeeType.EDUCATOR)) {
+                        getActiveUser().setAdmin(true);
+                    } else if (emp.getEmployeeType().equals(EmployeeType.HOD)) {
+                        getActiveUser().setAdmin(true);
+                    } else if (emp.getEmployeeType().equals(EmployeeType.PRINCIPAL)) {
+                        getActiveUser().setAdmin(true);
+                    }
+                }
+            } else if (user.getSystemUserType().equals(SystemUserType.SYSTEM_ADMIN)) {
+                getActiveUser().setEducator(true);
+            } else if (user.getSystemUserType().equals(SystemUserType.LEARNER)) {
+                getActiveUser().setLearner(true);
+            }
+            return true;
         }
         return false;
     }
@@ -165,11 +176,11 @@ public class LoginBean extends BaseBean {
         }
     }
 
-    public LoginServiceLocal getLoginService() {
+    public SystemUserServiceLocal getLoginService() {
         return loginService;
     }
 
-    public void setLoginService(LoginServiceLocal loginService) {
+    public void setLoginService(SystemUserServiceLocal loginService) {
         this.loginService = loginService;
     }
 
@@ -245,12 +256,20 @@ public class LoginBean extends BaseBean {
         this.resetPasswordPanel = resetPasswordPanel;
     }
 
-    public SystemUser getSystemUser() {
+    public SchoolSystemUser getSystemUser() {
         return systemUser;
     }
 
-    public void setSystemUser(SystemUser systemUser) {
+    public void setSystemUser(SchoolSystemUser systemUser) {
         this.systemUser = systemUser;
+    }
+
+    public ActiveUser getActiveUser() {
+        return activeUser;
+    }
+
+    public void setActiveUser(ActiveUser activeUser) {
+        this.activeUser = activeUser;
     }
 
 }

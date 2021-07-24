@@ -10,7 +10,6 @@ import javax.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import za.gov.sars.common.EmployeeType;
 import za.gov.sars.common.PersonType;
-import za.gov.sars.common.SystemUserType;
 import za.gov.sars.domain.Employee;
 import za.gov.sars.service.EmployeeServiceLocal;
 
