@@ -12,11 +12,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.web.jsf.FacesContextUtils;
+import za.gov.sars.common.PersonType;
 
 /**
  *
@@ -25,11 +27,12 @@ import org.springframework.web.jsf.FacesContextUtils;
 // if you want things to be impleemnted inn form of bytes and through network
 public class BaseBean extends SpringBeanAutowiringSupport implements Serializable {
 
- //  @ManagedProperty(value="#{activeUser")
-    //private ActiveUser activeUser;
+   @ManagedProperty(value="#{activeUser")
+   private ActiveUser activeUser;
     private boolean add;
     private boolean list;
     private boolean visible;
+    private boolean visiblePage;
     private List<String> errorCollectionMsg = new ArrayList<>();
 
     public void init()//this method means initialzation
@@ -74,7 +77,7 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         this.setList(reset);
         return this;
     }
-    /*
+    
      public ActiveUser getActiveUser() {
      return activeUser;
      }
@@ -84,14 +87,14 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
      }
 
      public void isUserLoggedIn(String redirectPage) {
-     // if (!getActiveUser().isUserLoginIndicator()) {
+      if (!getActiveUser().isUserLoginIndicator()) {
      try {
      FacesContext.getCurrentInstance().getExternalContext().redirect(redirectPage);
      } catch (IOException ex) {
      Logger.getLogger(BaseBean.class.getName()).log(Level.SEVERE, null, ex);
      }
-     //}
-     }**/
+     }
+     }
 
     public void redirect(String redirectPage) {
         try {
@@ -105,14 +108,14 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         if (session != null) {
             session.invalidate();
-            // getActiveUser().setUserLoginIndicator(Boolean.FALSE);
+             getActiveUser().setUserLoginIndicator(Boolean.FALSE);
         }
     }
 
     public boolean isUserSessionExpired() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         if (session == null) {
-            //  getActiveUser().setUserLoginIndicator(Boolean.FALSE);
+              getActiveUser().setUserLoginIndicator(Boolean.FALSE);
             return true;
         }
         return false;
@@ -126,7 +129,7 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         return this;
     }
 
-    /* public boolean isAdminUser() {
+     public boolean isAdminUser() {
      return getActiveUser().getPersonType().equals(PersonType.SYSTEM_USER);
      }
 
@@ -137,7 +140,7 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
      public boolean isLearner() {
      return getActiveUser().getPersonType().equals(PersonType.LEARNER);
      }
-     **/
+    
     public void reRoute(String page) {
         try {
             StringBuilder builder = new StringBuilder(page);
@@ -275,6 +278,18 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         this.getErrorCollectionMsg().add(stringBuilder.toString());
 
     }
+    public String defaultRouter(String pg)
+    {
+        StringBuilder builder=new StringBuilder(pg);
+        builder.append(".xhtml");
+        return builder.toString();
+    }
+    public String defaultRouting(String pg)
+    {
+        StringBuilder builder=new StringBuilder(pg);
+        builder.append(".xhtml");
+        return builder.toString(); 
+    }
 
     /**
      *
@@ -303,5 +318,14 @@ public class BaseBean extends SpringBeanAutowiringSupport implements Serializabl
         errorCollectionMsg.add(message);
 
     }
+
+    public boolean isVisiblePage() {
+        return visiblePage;
+    }
+
+    public void setVisiblePage(boolean visiblePage) {
+        this.visiblePage = visiblePage;
+    }
+    
 
 }

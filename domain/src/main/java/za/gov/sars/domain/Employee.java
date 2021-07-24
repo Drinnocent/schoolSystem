@@ -30,7 +30,7 @@ import za.gov.sars.common.EmployeeType;
 @Table(name = "employee")
 public class Employee extends Person {
 
-    @Column(name = "employee_Id",unique = true)
+    @Column(name = "employeeId")
     private String employeeId;
     @Column(name = "sace_RegNumber")
     private String saceRegNumber;
@@ -97,6 +97,14 @@ public class Employee extends Person {
 
     public void setEmployeeType(EmployeeType employeeType) {
         this.employeeType = employeeType;
+    }
+
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
     }
 
 }

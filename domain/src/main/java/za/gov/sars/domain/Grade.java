@@ -33,7 +33,7 @@ public class Grade extends BaseEntity {
     private String designation;
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Student> students = new ArrayList<>();
-    @ManyToMany(mappedBy="grades",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Employee> employees = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private School school;

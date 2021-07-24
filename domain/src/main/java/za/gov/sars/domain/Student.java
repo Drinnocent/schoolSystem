@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -29,7 +29,7 @@ import org.hibernate.envers.Audited;
 @Table(name = "student")
 public class Student extends Person {
 
-    @Column(name = "Student_Number")
+    @Column(name = "studentNumber")
     private String studentNumber;
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "student_subject", joinColumns = {

@@ -8,14 +8,14 @@ package za.gov.sars.service;
 import java.util.Date;
 import za.gov.sars.common.AddressType;
 import za.gov.sars.common.EmployeeType;
+import za.gov.sars.common.Gender;
 import za.gov.sars.common.PersonType;
-import za.gov.sars.common.SystemUserType;
 import za.gov.sars.domain.Address;
 import za.gov.sars.domain.ContactDetail;
 import za.gov.sars.domain.Employee;
-import za.gov.sars.domain.SystemUser;
 import za.gov.sars.persistence.EmployeeRepository;
 import za.gov.sars.persistence.GradeRepository;
+import za.gov.sars.persistence.SchoolRepository;
 import za.gov.sars.persistence.SubjectRepository;
 
 /**
@@ -24,7 +24,7 @@ import za.gov.sars.persistence.SubjectRepository;
  */
 public class EmployeeHelper {
 
-    public static void addEmployee(EmployeeRepository employeeRepository, SubjectRepository subjectRepository, GradeRepository gradeReposistory) {
+    public static void addEmployee(EmployeeRepository employeeRepository, SubjectRepository subjectRepository, GradeRepository gradeReposistory,SchoolRepository schoolRepository) {
         Employee employee1 = new Employee();
 
         employee1.setCreatedBy("Test");
@@ -36,6 +36,11 @@ public class EmployeeHelper {
         employee1.setPersonType(PersonType.EMPLOYEE);
         employee1.setSaceRegNumber("0201044");
         employee1.setEmployeeType(EmployeeType.EDUCATOR);
+        
+        employee1.setGenderType(Gender.MALE);
+        employee1.setGrades(gradeReposistory.findAll());
+       employee1.setSubjects(subjectRepository.findAll());
+       employee1.setSchool(schoolRepository.findAll().get(schoolRepository.findAll().size()-1));
 
         ContactDetail contact1 = new ContactDetail();
         contact1.setCreatedBy("Abelo");
@@ -67,7 +72,7 @@ public class EmployeeHelper {
 
         employee1.addAddress(addr1);
         employee1.addAddress(addr2);
-       // employee1.setGrades(gradeReposistory.findAll());
+        employee1.setGrades(gradeReposistory.findAll());
         employee1.setSubjects(subjectRepository.findAll());
 
         employeeRepository.save(employee1);
@@ -83,6 +88,10 @@ public class EmployeeHelper {
         employee2.setPersonType(PersonType.EMPLOYEE);
         employee2.setSaceRegNumber("0201044");
         employee2.setEmployeeType(EmployeeType.HOD);
+        employee2.setGenderType(Gender.MALE);
+        employee2.setGrades(gradeReposistory.findAll());
+        employee2.setSubjects(subjectRepository.findAll());
+        employee2.setSchool(schoolRepository.findAll().get(schoolRepository.findAll().size()-1));
 
         ContactDetail contact2 = new ContactDetail();
         contact2.setCreatedBy("Aphiwe");
@@ -126,6 +135,10 @@ public class EmployeeHelper {
         employee3.setPersonType(PersonType.EMPLOYEE);
         employee3.setSaceRegNumber("0201044");
         employee3.setEmployeeType(EmployeeType.PRINCIPAL);
+        employee3.setGenderType(Gender.MALE);
+        employee3.setGrades(gradeReposistory.findAll());
+        employee3.setSubjects(subjectRepository.findAll());
+        employee3.setSchool(schoolRepository.findAll().get(schoolRepository.findAll().size()-1));
 
         ContactDetail contact3 = new ContactDetail();
         contact3.setCreatedBy("Test");
@@ -169,6 +182,11 @@ public class EmployeeHelper {
         employee4.setPersonType(PersonType.EMPLOYEE);
         employee4.setSaceRegNumber("0201044");
         employee4.setEmployeeType(EmployeeType.GENERAL_WORKER);
+        employee4.setGenderType(Gender.MALE);
+        employee4.setGrades(gradeReposistory.findAll());
+        employee4.setSubjects(subjectRepository.findAll());
+        employee4.setSchool(schoolRepository.findAll().get(schoolRepository.findAll().size()-1));
+        
 
         ContactDetail contact4 = new ContactDetail();
         contact4.setCreatedBy("Lelo");
@@ -212,6 +230,10 @@ public class EmployeeHelper {
         employee5.setPersonType(PersonType.EMPLOYEE);
         employee5.setSaceRegNumber("0201044");
         employee5.setEmployeeType(EmployeeType.CLERK);
+        employee5.setGenderType(Gender.MALE);
+        employee5.setGrades(gradeReposistory.findAll());
+        employee5.setSubjects(subjectRepository.findAll());
+        employee5.setSchool(schoolRepository.findAll().get(schoolRepository.findAll().size()-1));
 
         ContactDetail contact5 = new ContactDetail();
         contact5.setCreatedBy("Lethu");
@@ -255,6 +277,10 @@ public class EmployeeHelper {
         employee6.setPersonType(PersonType.EMPLOYEE);
         employee6.setSaceRegNumber("0201044");
         employee6.setEmployeeType(EmployeeType.ADMIN);
+        employee6.setGenderType(Gender.MALE);
+        employee6.setGrades(gradeReposistory.findAll());
+        employee6.setSubjects(subjectRepository.findAll());
+        employee6.setSchool(schoolRepository.findAll().get(schoolRepository.findAll().size()-1));
 
         ContactDetail contact6 = new ContactDetail();
         contact6.setCreatedBy("Miz");

@@ -7,6 +7,7 @@ package za.gov.sars.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import za.gov.sars.domain.School;
 import za.gov.sars.persistence.SchoolRepository;
 
@@ -14,6 +15,7 @@ import za.gov.sars.persistence.SchoolRepository;
  *
  * @author S2028389
  */
+@Service
 public class SchoolService implements SchoolServiceLocal {
 
     @Autowired

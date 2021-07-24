@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.envers.Audited;
+import za.gov.sars.common.Gender;
 import za.gov.sars.common.SystemUserStatus;
 import za.gov.sars.common.SystemUserType;
 
@@ -23,8 +24,8 @@ import za.gov.sars.common.SystemUserType;
  */
 @Audited
 @Entity
-@Table(name="system_user")
-public class SystemUser extends Person{
+@Table(name="systemuser")
+public class SchoolSystemUser extends Person{
     @Column(name = "username")
     private String username;
     @Column(name = "password")
@@ -38,10 +39,12 @@ public class SystemUser extends Person{
     @Enumerated(EnumType.STRING)
     @Column(name = "system_user_type")
     private SystemUserType systemUserType;
+        
     @Column(name = "system_user_status")
     private SystemUserStatus systemUserStatus;
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    private School schoo;
+    private School school;
+    
     public String getUsername() {
         return username;
     }
@@ -90,12 +93,12 @@ public class SystemUser extends Person{
         this.systemUserStatus = systemUserStatus;
     }
 
-    public School getSchoo() {
-        return schoo;
+    public School getSchool() {
+        return school;
     }
 
-    public void setSchoo(School schoo) {
-        this.schoo = schoo;
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     public String getIdentifier() {
@@ -104,8 +107,5 @@ public class SystemUser extends Person{
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
-    }
-    
-    
-    
+    } 
 }

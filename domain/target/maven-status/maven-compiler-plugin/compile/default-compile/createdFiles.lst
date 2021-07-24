@@ -8,6 +8,6 @@ za\gov\sars\domain\Attendance.class
 za\gov\sars\domain\School.class
 za\gov\sars\domain\BaseEntity.class
 za\gov\sars\domain\Subject.class
+za\gov\sars\domain\SchoolSystemUser.class
 za\gov\sars\domain\Assessment.class
 za\gov\sars\domain\Person.class
-za\gov\sars\domain\SystemUser.class

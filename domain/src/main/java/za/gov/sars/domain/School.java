@@ -85,5 +85,12 @@ public class School extends BaseEntity {
     public void setFacilities(List<Facility> facilities) {
         this.facilities = facilities;
     }
+     public void addAddress(Address address) {
+        this.address.add(address);
+    }
+    public void addContact(ContactDetail contact)
+    {
+        this.contacts.add(contact);
+    }
 
 }
